@@ -1,6 +1,8 @@
 name: Update LostArk Ranking
 
 on:
+  push:                   # [추가됨] 파일 수정(Push)이 일어나면 즉시 실행!
+    branches: [ "main" ]
   schedule:
     - cron: '0 */1 * * *' # 1시간마다 자동 실행
   workflow_dispatch:      # 수동 실행 버튼 활성화
