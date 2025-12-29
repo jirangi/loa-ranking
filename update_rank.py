@@ -21,13 +21,13 @@ GROUPS = [
         "name": "제숙단",
         "txt_file": "jesukdan.txt",          # 기본 명단 파일 (없으면 자동 생성됨)
         "json_file": "jesukdan_data.json",   # 저장될 데이터 파일
-        "sheet_url": "여기에_제숙단_CSV_링크를_넣으세요"  # 👈 [입력 1]
+        "sheet_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRYJZDPz2DK2bYNbwDWg-Lrd2GWOGunX8BZGYsW_nE7Xomcv93zCtN00vj_tFZESjQGCYKsL1BlxJ03/pub?output=csv"  # 👈 [입력 1]
     },
     {
         "name": "놀자에요",
         "txt_file": "nolja.txt",             # 기본 명단 파일 (새로 만드세요!)
         "json_file": "nolja_data.json",      # 저장될 데이터 파일
-        "sheet_url": "여기에_놀자에요_CSV_링크를_넣으세요" # 👈 [입력 2]
+        "sheet_url": "https://docs.google.com/spreadsheets/d/1BGzvgQ_PN70_DUCv5b0lbdIp5Fq3arIkPRpmZ2AVfWY/edit?resourcekey=&gid=1405051#gid=1405051" # 👈 [입력 2]
     }
 ]
 
