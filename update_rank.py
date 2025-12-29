@@ -1,197 +1,105 @@
-import requests
 import os
-from datetime import datetime
+import requests
+from bs4 import BeautifulSoup
+import datetime
+import time
 
-# API 키 가져오기 (Bearer 제거 안전장치 포함)
+# ==========================================
+# 1. 설정 (환경 변수에서 안전하게 키 가져오기)
+# ==========================================
+# 말씀하신 코드 그대로 적용했습니다.
 RAW_API_KEY = os.environ.get('LOA_API_KEY', '')
 API_KEY = RAW_API_KEY.replace("Bearer ", "").replace("bearer ", "").strip()
 
-# 닉네임 리스트
-NICKNAMES = [
-    "베이비블러쉬", "삼동서머너", "씩씩", "레닌저생화학", "본과호소인", "부추쨩",
-    "매일좋은날", "에겐남다다규", "하니쿠", "브레이커쥬니", "서냥이용", "오함마의유혹",
-    "븜구리빵", "쏠쏠한포인트", "유산떡락기원", "조선명기", "프리아포스",
-    "핑뚝이환수사", "기립", "이핼", "리핼",
-    "기상학과추상우", "아가일도",
-    "강기석", "미니멀건랜스", "방패쓰는뽈세밍", "뎀딜스커", "태티트",
-    "AB시디", "명동성당촛대도둑", "빗나감군단장", "양호시", "독립기념일",
-    "간지버거", "탑땡구", "뚜바비뷰", "지금기상해서술사", "한적한흔적",
-    "종말의날은영어로떼바...", "주지육림", "최고의스펠뮤트올", "카레이쏭", "헤롱콩",
-    "슉슈슉금잼칠", "힐러태연", "공대남", "그형의몽둥이", "낫뜨거워",
-    "밤꽃향기나는그녀", "선우현", "절구슬", "노량진게이"
-]
+HTML_FILE = "index.html"
 
-debug_logs = []
-def get_info(nickname):
-    # --- [추가할 코드 시작] ---
-    # 핑뚝이환수사 차례가 오면, API가 주는 모든 데이터를 화면에 뿌려봅니다.
-    if nickname == "핑뚝이환수사":
-        encoded_name = requests.utils.quote(nickname)
-        url = f'https://developer-lostark.game.onstove.com/armories/characters/{encoded_name}/profiles'
-        headers = {'accept': 'application/json', 'authorization': f'bearer {API_KEY}'}
-        check_res = requests.get(url, headers=headers)
-        print(f"\n★ 핑뚝이환수사 데이터 확인:\n{check_res.json()}\n")
-    # --- [추가할 코드 끝] ---
-def get_info(nickname):
-    if not nickname or nickname.endswith("..."):
-        return None
+# 키가 제대로 들어왔는지 체크 (보안상 앞 5자리만 출력)
+if not API_KEY:
+    print("❌ 오류: 'LOA_API_KEY' 환경 변수가 설정되지 않았습니다!")
+    exit(1)
+else:
+    print(f"🔑 API 키 로드 성공 (앞부분: {API_KEY[:5]}...)")
+
+# ==========================================
+# 2. HTML 파일 읽기
+# ==========================================
+print("📂 index.html 파일을 읽는 중...")
+try:
+    with open(HTML_FILE, 'r', encoding='utf-8') as f:
+        soup = BeautifulSoup(f, 'html.parser')
+except FileNotFoundError:
+    print(f"❌ 오류: {HTML_FILE} 파일을 찾을 수 없습니다.")
+    exit(1)
+
+# HTML에서 캐릭터 목록(행)을 모두 찾습니다.
+rows = soup.select('.rank-row')
+print(f"📊 총 {len(rows)}명의 캐릭터를 발견했습니다. 전투력 업데이트를 시작합니다.")
+
+# ==========================================
+# 3. 각 캐릭터별 데이터 업데이트
+# ==========================================
+headers = {
+    'accept': 'application/json',
+    'authorization': f'bearer {API_KEY}'
+}
+
+for i, row in enumerate(rows, 1):
+    # 1) HTML에서 캐릭터 닉네임 가져오기
+    name_div = row.select_one('.char-name')
+    if not name_div:
+        continue
     
-    encoded_name = requests.utils.quote(nickname)
-    url = f'https://developer-lostark.game.onstove.com/armories/characters/{encoded_name}/profiles'
-    headers = {'accept': 'application/json', 'authorization': f'bearer {API_KEY}'}
+    name = name_div.text.strip()
+    print(f"[{i}/{len(rows)}] '{name}' 조회 중...", end=" ")
+
+    # 2) API 호출 (전투력 정보 가져오기)
+    # 한글 닉네임 인코딩 등은 requests가 알아서 처리해줍니다.
+    url = f"https://developer-lostark.game.onstove.com/armories/characters/{name}"
     
     try:
-        res = requests.get(url, headers=headers)
-        if res.status_code == 200:
-            data = res.json()
-            if not data:
-                debug_logs.append(f"❌ {nickname}: 데이터 없음 (null)")
-                return None
+        response = requests.get(url, headers=headers)
+        
+        if response.status_code == 200:
+            data = response.json()
             
-            # [수정됨] ItemMaxLevel이 없으면 ItemAvgLevel을 가져오도록 변경
-            level_str = data.get('ItemMaxLevel', data.get('ItemAvgLevel'))
+            # ★ 핵심 수정: 'CombatPower' (전투력) 가져오기
+            # 값이 없으면 0으로 처리
+            combat_power = "0"
+            if data and 'ArmoryProfile' in data:
+                combat_power = data['ArmoryProfile'].get('CombatPower', '0')
             
-            if not level_str:
-                debug_logs.append(f"🛑 {nickname}: 레벨 정보 없음 - {str(data)}")
-                return None
-
-            attack_power = "-"
-            if 'Stats' in data:
-                for stat in data['Stats']:
-                    if stat['Type'] == "공격력":
-                        attack_power = stat['Value']
-                        break
+            # 3) HTML 값 업데이트 (.battle-val 클래스 찾기)
+            val_div = row.select_one('.battle-val') 
             
-            img_url = data.get('CharacterImage')
-            if not img_url:
-                img_url = "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png"
-
-            return {
-                'name': nickname,
-                'class': data['CharacterClassName'],
-                'level': float(level_str.replace(',', '')),
-                'atk': attack_power,
-                'img': img_url
-            }
-        elif res.status_code == 401:
-            debug_logs.append(f"🔒 {nickname}: 인증 실패 (401)")
+            if val_div:
+                val_div.string = str(combat_power) # 값 덮어쓰기
+                print(f"✅ 성공 -> {combat_power}")
+            else:
+                print("⚠️ 실패 (HTML에 .battle-val 클래스가 없음)")
+                
+        elif response.status_code == 429:
+             print(f"⏳ 너무 빠릅니다! (429 Too Many Requests)")
+             time.sleep(5) # 5초 대기
         else:
-            debug_logs.append(f"⚠️ {nickname}: 서버 오류 ({res.status_code})")
+            print(f"❌ API 오류 ({response.status_code})")
             
     except Exception as e:
-        debug_logs.append(f"💥 {nickname}: 에러 - {str(e)}")
-    return None
-
-def main():
-    if not API_KEY:
-        error_html = "<h1>🚫 API 키가 없습니다. Settings > Secrets를 확인하세요.</h1>"
-        with open("index.html", "w", encoding="utf-8") as f:
-            f.write(error_html)
-        return
-
-    results = []
-    print(f"--- 조회 시작 ({len(NICKNAMES)}명) ---")
+        print(f"💥 에러 발생: {e}")
     
-    for name in NICKNAMES:
-        info = get_info(name)
-        if info: 
-            results.append(info)
-    
-    # 실패 시 로그 출력
-    if len(results) == 0:
-        log_html = ""
-        for log in debug_logs[:10]:
-            color = "#ff6b6b"
-            if "🛑" in log: color = "#ffca5c"
-            log_html += f'<div style="color:{color}; margin-bottom:5px;">{log}</div>'
+    # 서버 부하 방지 및 API 제한 준수를 위해 딜레이
+    time.sleep(0.1) # 0.1초 대기
 
-        html = f"""
-        <!DOCTYPE html>
-        <html lang="ko">
-        <body style="background-color: #222; color: white; padding: 30px; font-family: sans-serif;">
-            <h1 style="color: #ff6b6b;">⚠️ 데이터 조회 실패</h1>
-            <div style="background: #333; padding: 20px; border-radius: 10px; font-family: monospace;">
-                {log_html}
-            </div>
-        </body>
-        </html>
-        """
-        with open("index.html", "w", encoding="utf-8") as f:
-            f.write(html)
-        return
+# ==========================================
+# 4. 업데이트 시간 기록 및 저장
+# ==========================================
+# 하단 시간 업데이트
+time_div = soup.select_one('.update-time')
+if time_div:
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    time_div.string = f"마지막 업데이트: {now}"
 
-    # 성공 시 랭킹 출력
-    results.sort(key=lambda x: x['level'], reverse=True)
+# 파일 저장
+with open(HTML_FILE, 'w', encoding='utf-8') as f:
+    f.write(str(soup))
 
-    html = f"""
-    <!DOCTYPE html>
-    <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>놀자에요 랭킹</title>
-        <style>
-            body {{ font-family: 'Apple SD Gothic Neo', sans-serif; background-color: #121214; color: #e0e0e0; display: flex; justify-content: center; padding: 20px; margin: 0; }}
-            .container {{ max-width: 900px; width: 100%; background-color: #1e1e20; border-radius: 12px; padding: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.5); }}
-            h2 {{ text-align: center; color: #ffca5c; margin-bottom: 20px; }}
-            .rank-row {{ display: flex; align-items: center; background-color: #2a2a2e; margin-bottom: 10px; padding: 10px 20px; border-radius: 8px; border: 1px solid #3a3a40; transition: 0.2s; }}
-            .rank-row:hover {{ background-color: #35353a; transform: translateY(-2px); }}
-            .rank-num {{ width: 40px; font-size: 1.2em; font-weight: bold; color: #888; text-align: center; }}
-            .rank-1 {{ color: #ffd700; }} .rank-2 {{ color: #c0c0c0; }} .rank-3 {{ color: #cd7f32; }}
-            .char-img {{ width: 50px; height: 50px; border-radius: 50%; border: 2px solid #555; object-fit: cover; margin: 0 20px; background: #000; }}
-            .char-info {{ flex-grow: 1; }}
-            .char-name {{ font-size: 1.1em; font-weight: bold; color: #fff; }}
-            .char-class {{ font-size: 0.85em; color: #aaa; margin-top: 2px; }}
-            .stat-box {{ width: 100px; text-align: right; margin-left: 10px; }}
-            .stat-label {{ font-size: 0.75em; color: #777; display: block; }}
-            .stat-value {{ font-size: 1.1em; font-weight: bold; }}
-            .level-val {{ color: #00d1ce; }}
-            .atk-val {{ color: #ff6b6b; }}
-            .update-time {{ text-align: center; font-size: 0.8em; color: #555; margin-top: 20px; }}
-            @media (max-width: 600px) {{
-                .rank-row {{ flex-wrap: wrap; padding: 15px; }}
-                .char-img {{ width: 40px; height: 40px; margin: 0 10px; }}
-                .stat-box {{ width: 45%; margin: 10px 0 0 0; text-align: left; }}
-            }}
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h2>🏆 놀자에요 전투력 측정기</h2>
-            <div class="list-area">
-    """
-    
-    for i, char in enumerate(results, 1):
-        rank_class = f"rank-{i}" if i <= 3 else ""
-        html += f"""
-            <div class="rank-row">
-                <div class="rank-num {rank_class}">{i}</div>
-                <img src="{char['img']}" class="char-img" alt="img">
-                <div class="char-info">
-                    <div class="char-name">{char['name']}</div>
-                    <div class="char-class">{char['class']}</div>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-label">아이템 레벨</span>
-                    <div class="stat-value level-val">{char['level']:,.2f}</div>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-label">공격력</span>
-                    <div class="stat-value atk-val">{char['atk']}</div>
-                </div>
-            </div>
-        """
-    
-    html += f"""
-            </div>
-            <div class="update-time">마지막 업데이트: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</div>
-        </div>
-    </body>
-    </html>
-    """
-
-    with open("index.html", "w", encoding="utf-8") as f:
-        f.write(html)
-
-if __name__ == "__main__":
-    main()
+print("\n🎉 모든 작업이 완료되었습니다! index.html의 전투력이 갱신되었습니다.")
