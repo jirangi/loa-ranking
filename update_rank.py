@@ -22,7 +22,16 @@ NICKNAMES = [
 ]
 
 debug_logs = []
-
+def get_info(nickname):
+    # --- [추가할 코드 시작] ---
+    # 핑뚝이환수사 차례가 오면, API가 주는 모든 데이터를 화면에 뿌려봅니다.
+    if nickname == "핑뚝이환수사":
+        encoded_name = requests.utils.quote(nickname)
+        url = f'https://developer-lostark.game.onstove.com/armories/characters/{encoded_name}/profiles'
+        headers = {'accept': 'application/json', 'authorization': f'bearer {API_KEY}'}
+        check_res = requests.get(url, headers=headers)
+        print(f"\n★ 핑뚝이환수사 데이터 확인:\n{check_res.json()}\n")
+    # --- [추가할 코드 끝] ---
 def get_info(nickname):
     if not nickname or nickname.endswith("..."):
         return None
