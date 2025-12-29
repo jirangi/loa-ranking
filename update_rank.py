@@ -24,7 +24,7 @@ GROUPS = [
         "name": "놀자에요",
         "txt_file": "nolja.txt",
         "json_file": "nolja_data.json",
-        "sheet_url": "https://docs.google.com/spreadsheets/d/1BGzvgQ_PN70_DUCv5b0lbdIp5Fq3arIkPRpmZ2AVfWY/export?format=csv&gid=1405051"
+        "sheet_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQqw-xJfEXM-EvpHbNaN3W-6X0AwlcKdiIGMLhHuD70POHaBZgWERs551beDYoSyieMupea1tLuM8mQ/pub?output=csv"
     }
 ]
 
