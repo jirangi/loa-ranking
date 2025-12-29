@@ -1,0 +1,826 @@
+
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>놀자에요 랭킹</title>
+<style>
+            body { font-family: 'Apple SD Gothic Neo', sans-serif; background-color: #121214; color: #e0e0e0; display: flex; justify-content: center; padding: 20px; margin: 0; }
+            .container { max-width: 900px; width: 100%; background-color: #1e1e20; border-radius: 12px; padding: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.5); }
+            h2 { text-align: center; color: #ffca5c; margin-bottom: 20px; }
+            .rank-row { display: flex; align-items: center; background-color: #2a2a2e; margin-bottom: 10px; padding: 10px 20px; border-radius: 8px; border: 1px solid #3a3a40; transition: 0.2s; }
+            .rank-row:hover { background-color: #35353a; transform: translateY(-2px); }
+            .rank-num { width: 40px; font-size: 1.2em; font-weight: bold; color: #888; text-align: center; }
+            .rank-1 { color: #ffd700; } .rank-2 { color: #c0c0c0; } .rank-3 { color: #cd7f32; }
+            .char-img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #555; object-fit: cover; margin: 0 20px; background: #000; }
+            .char-info { flex-grow: 1; }
+            .char-name { font-size: 1.1em; font-weight: bold; color: #fff; }
+            .char-class { font-size: 0.85em; color: #aaa; margin-top: 2px; }
+            .stat-box { width: 100px; text-align: right; margin-left: 10px; }
+            .stat-label { font-size: 0.75em; color: #777; display: block; }
+            .stat-value { font-size: 1.1em; font-weight: bold; }
+            .level-val { color: #00d1ce; }
+            .atk-val { color: #ff6b6b; }
+            .update-time { text-align: center; font-size: 0.8em; color: #555; margin-top: 20px; }
+            @media (max-width: 600px) {
+                .rank-row { flex-wrap: wrap; padding: 15px; }
+                .char-img { width: 40px; height: 40px; margin: 0 10px; }
+                .stat-box { width: 45%; margin: 10px 0 0 0; text-align: left; }
+            }
+        </style>
+</head>
+<body>
+<div class="container">
+<h2>🏆 놀자에요 전투력 측정기</h2>
+<div class="list-area">
+<div class="rank-row">
+<div class="rank-num rank-1">1</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/7/B1C3B779EC0DB0A067336590BC304E849152B6DC665282C5FD211632913C3A4E.jpg?v=20251228024813"/>
+<div class="char-info">
+<div class="char-name">아가일도</div>
+<div class="char-class">도화가</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,753.33</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">179650</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num rank-2">2</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/5/DDA7C1F8118058B2AE629F1C5F824B8DF060E53052FB6BC0AE8C08C6382F6E1D.jpg?v=20251229012036"/>
+<div class="char-info">
+<div class="char-name">지금기상해서술사</div>
+<div class="char-class">기상술사</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,751.66</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">186650</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num rank-3">3</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/5/C30CBB8F707C9136F3565A8C6A154F5490D857B7EC8B9CB4A7B92AB877700676.jpg?v=20251227071510"/>
+<div class="char-info">
+<div class="char-name">부추쨩</div>
+<div class="char-class">버서커</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,750.83</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">183801</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">4</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/7/6979AA66CF5068BD91C3A9C6BF1A4DEB1152C28E663AB18EB7DD770D6A8AF33C.jpg?v=20251227170141"/>
+<div class="char-info">
+<div class="char-name">선우현</div>
+<div class="char-class">홀리나이트</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,750.83</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">180008</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">5</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/8/4F237A1211CCDB0E2726D1F5E368A7B50CA6F779BC267E4EED5FAA2F1A836934.jpg?v=20251228182544"/>
+<div class="char-info">
+<div class="char-name">브레이커쥬니</div>
+<div class="char-class">브레이커</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,750.00</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">184701</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">6</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/8/C7AEC6CDEE2B5FC81A7D5E2A5F3F45519ACE8A8EF318CDE6173EDD6BCF846159.jpg?v=20251227010007"/>
+<div class="char-info">
+<div class="char-name">쏠쏠한포인트</div>
+<div class="char-class">버서커</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,750.00</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">182519</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">7</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/4/F98C0A886B51C242FCC95783469C32281EBA326FF93ACE91FBDA3BEC1B6DE02A.jpg?v=20251227052524"/>
+<div class="char-info">
+<div class="char-name">슉슈슉금잼칠</div>
+<div class="char-class">블레이드</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,750.00</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">189136</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">8</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/8/54C901F9868C5775D14E21D37E15337D1A253C80C0B8E3BF9CBF597D8A2F9377.jpg?v=20251228124855"/>
+<div class="char-info">
+<div class="char-name">미니멀건랜스</div>
+<div class="char-class">워로드</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,748.33</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">180499</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">9</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/0/F4C4329F6050B2862545446F05B1E53058A352BBD3691245E1473A69CF0A8785.jpg?v=20251228150747"/>
+<div class="char-info">
+<div class="char-name">매일좋은날</div>
+<div class="char-class">바드</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,746.66</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">170837</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">10</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/1/ADC193056CB97EA87A311C1E05D62699B69471F9AA558C8A088620930A6C20DA.jpg?v=20251228054644"/>
+<div class="char-info">
+<div class="char-name">유산떡락기원</div>
+<div class="char-class">스카우터</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,746.66</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">182196</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">11</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/0/245C44508DD0D79ABC103A0919665E2E73882C1BEABF734C8B00E8C4A63619AB.jpg?v=20251226125532"/>
+<div class="char-info">
+<div class="char-name">AB시디</div>
+<div class="char-class">바드</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,746.66</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">170967</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">12</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/3/E9F6A46D92BFF8C39398954769680DE7B6A7215057A8111F7492DBF4D57B0C45.jpg?v=20251228080120"/>
+<div class="char-info">
+<div class="char-name">힐러태연</div>
+<div class="char-class">도화가</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,746.66</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">168462</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">13</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/6/8C62F7ACA79CEA5D890213A2859F774EDB4E346CD6FB166CDD6E52B07DFD7459.jpg?v=20251228204009"/>
+<div class="char-info">
+<div class="char-name">밤꽃향기나는그녀</div>
+<div class="char-class">바드</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,746.66</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">167191</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">14</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/2/EC356E6D8E767A891D52B28E716E65EEA08A4FBE6C82B0A1B7F94F4D1E52D099.jpg?v=20251228120701"/>
+<div class="char-info">
+<div class="char-name">절구슬</div>
+<div class="char-class">바드</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,745.83</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">168605</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">15</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/7/A59E25CBA1D862F1478DC7207FF4DABD484734B07B1D873DB2299E72BAE19F18.jpg?v=20251229040423"/>
+<div class="char-info">
+<div class="char-name">조선명기</div>
+<div class="char-class">기공사</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,745.00</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">172688</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">16</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/5/C120CA1752DA90D4B3FFCFDA664A0D54C02D6634583905C4688D5FEB47B5F392.jpg?v=20251227090221"/>
+<div class="char-info">
+<div class="char-name">프리아포스</div>
+<div class="char-class">소서리스</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,745.00</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">180555</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">17</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/4/3ECF3F186EF55C6473CAB6329D7CE4ABADBF5E07D896A544D16F604BB2EEDA25.jpg?v=20251228115354"/>
+<div class="char-info">
+<div class="char-name">그형의몽둥이</div>
+<div class="char-class">디스트로이어</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,745.00</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">161018</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">18</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/5/802ED4EC5D6693E2A33D6E98C369342F3CF0CA401692D2F8F63D301F92D1AF0A.jpg?v=20251228154002"/>
+<div class="char-info">
+<div class="char-name">삼동서머너</div>
+<div class="char-class">서머너</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,744.16</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">174996</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">19</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/1/D744AF46A7758EBCF69DB599AC91EA1E7FF17BC7930BB37309BAE8EC9DC256D6.jpg?v=20251228091504"/>
+<div class="char-info">
+<div class="char-name">레닌저생화학</div>
+<div class="char-class">브레이커</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,744.16</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">178736</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">20</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/3/F36AC32AB03B20821E4C66F5AA642C061048320981306326B0CBC3463F796BC5.jpg?v=20251225152738"/>
+<div class="char-info">
+<div class="char-name">기립</div>
+<div class="char-class">가디언나이트</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,744.16</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">170468</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">21</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/9/9E4050AA6587AFC25EECB188CA32A4B9D999D661DF1940885CA39B9CE8F70C37.jpg?v=20251226164512"/>
+<div class="char-info">
+<div class="char-name">이핼</div>
+<div class="char-class">서머너</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,744.16</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">168588</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">22</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/3/7BEFEB88F15CDB8BE6AF2065A071E8664518333CF6AF56CD7DD6AB1438001E65.jpg?v=20251228050341"/>
+<div class="char-info">
+<div class="char-name">최고의스펠뮤트올</div>
+<div class="char-class">호크아이</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,744.16</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">171905</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">23</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/9/5D97CC81A00080A937FE28B3C1A789A3A8025E6B9682267587C25311345E7CB5.jpg?v=20251228104513"/>
+<div class="char-info">
+<div class="char-name">뚜바비뷰</div>
+<div class="char-class">아르카나</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,743.33</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">161971</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">24</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/2/E9F39749A50F870AD2437DDAAE85E10FD159D698B6E136C349FB30228A9144E9.jpg?v=20251228025143"/>
+<div class="char-info">
+<div class="char-name">한적한흔적</div>
+<div class="char-class">바드</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,743.33</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">172244</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">25</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/4/1E55267BFB1759B47B3D2CC560CBF8817CDDAF19D71B8888CBAE9940BEC354A8.jpg?v=20251227140526"/>
+<div class="char-info">
+<div class="char-name">태티트</div>
+<div class="char-class">아르카나</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,741.66</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">161283</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">26</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/2/9FF127632A406AF0CE50533EAAC1F4219F4A6EE2410D6E92D21CF14F5A4B919A.jpg?v=20251227092117"/>
+<div class="char-info">
+<div class="char-name">씩씩</div>
+<div class="char-class">도화가</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,740.83</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">150444</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">27</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/7/9DDDC4F1EBB876144FED0F5A8AE85308310DC7059C87B33B9B1F7067926DA4CC.jpg?v=20251228134831"/>
+<div class="char-info">
+<div class="char-name">하니쿠</div>
+<div class="char-class">바드</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,740.83</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">164967</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">28</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/9/AB78FCB5719BF7B3AB4E239F1FABAF3865A8D86C1F483F3B1F46001922590EEC.jpg?v=20251228143515"/>
+<div class="char-info">
+<div class="char-name">오함마의유혹</div>
+<div class="char-class">디스트로이어</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,740.00</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">173014</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">29</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/2/8540D4C1C058DA77C05AAB7EBFC3E439F5A4355971E87AE56682B6BD50558B0B.jpg?v=20251228100305"/>
+<div class="char-info">
+<div class="char-name">핑뚝이환수사</div>
+<div class="char-class">환수사</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,739.16</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">167666</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">30</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/3/B9650502BFCFEC2E7CDD1932CAA093C4E7D8FA5ECCA82FD89AB3DACAE2107DD5.jpg?v=20251219121709"/>
+<div class="char-info">
+<div class="char-name">헤롱콩</div>
+<div class="char-class">환수사</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,738.33</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">166698</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">31</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/1/117E9B3F260D70CE72024B0878CD6BB689CE6BBEF64F54F3B640F138AD97ACAF.jpg?v=20251228102001"/>
+<div class="char-info">
+<div class="char-name">븜구리빵</div>
+<div class="char-class">바드</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,735.83</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">147807</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">32</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/8/F714E8E763741320D85F81F0FB1A7C5BDA799EB34A671C12A84CC191AA9448FB.jpg?v=20251228005051"/>
+<div class="char-info">
+<div class="char-name">간지버거</div>
+<div class="char-class">바드</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,734.16</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">144321</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">33</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/7/E084B48AC0321221FDDB58688FF4C3550A68C58A5B4F7E6A8E608B8D82E71DFD.jpg?v=20251225061108"/>
+<div class="char-info">
+<div class="char-name">뎀딜스커</div>
+<div class="char-class">스트라이커</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,732.50</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">169233</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">34</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/4/09DFB24E160A205E8F43B74EBBD1B9884D4EE22760490EA74BD97455280B405F.jpg?v=20251228145414"/>
+<div class="char-info">
+<div class="char-name">탑땡구</div>
+<div class="char-class">환수사</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,732.50</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">160846</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">35</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/0/146751413A008AECBC47E247017354DFA805BCB192791BC4706FBC4CA121F7A5.jpg?v=20251210092557"/>
+<div class="char-info">
+<div class="char-name">주지육림</div>
+<div class="char-class">배틀마스터</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,729.16</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">146551</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">36</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/8/6F0FF4EBFD2F62CC1901FD5385F9CC9734C26ED67D18963DABBF0EFBC9250D5B.jpg?v=20251224080335"/>
+<div class="char-info">
+<div class="char-name">독립기념일</div>
+<div class="char-class">호크아이</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,728.83</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">148167</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">37</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/0/572283A0C70DA269954E53DF719FECB192A23E37B3BD194141A06CD41A173538.jpg?v=20251229040449"/>
+<div class="char-info">
+<div class="char-name">낫뜨거워</div>
+<div class="char-class">소울이터</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,721.66</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">154559</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">38</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/1/90BAECC1FA9239FEE01960B99EF8F669814507812132F16F821C0CD1B4B5958A.jpg?v=20251227025945"/>
+<div class="char-info">
+<div class="char-name">빗나감군단장</div>
+<div class="char-class">호크아이</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,712.33</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">125901</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">39</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/7/944D784EC13742D2760BFE11CEF310101653A74844C156AFC8BD7C6E0BA72FDC.jpg?v=20251224132134"/>
+<div class="char-info">
+<div class="char-name">에겐남다다규</div>
+<div class="char-class">브레이커</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,710.83</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">132653</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">40</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/0/5D69BCF37443FBBDEF0354955862234B26607B5F92F5E23DB35C07043F22FDD0.jpg?v=20251213142905"/>
+<div class="char-info">
+<div class="char-name">본과호소인</div>
+<div class="char-class">소울이터</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,710.00</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">127739</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">41</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/8/179EA904A9F55BE3F0825F623DBACEB71D4487C31D249289DC024641ACD777BB.jpg?v=20251228074905"/>
+<div class="char-info">
+<div class="char-name">노량진게이</div>
+<div class="char-class">홀리나이트</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,710.00</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">124301</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">42</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/8/71D58FC3EA5DF1E70A323CBAA910220B37392894758299203E72095AAC3002A5.jpg?v=20251225234740"/>
+<div class="char-info">
+<div class="char-name">명동성당촛대도둑</div>
+<div class="char-class">홀리나이트</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,706.66</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">122417</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">43</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/8/EDDFBB2CF43817D543CD4204602E109BABE378704ABFCD60E63B5184B47B7AB2.jpg?v=20251222145910"/>
+<div class="char-info">
+<div class="char-name">서냥이용</div>
+<div class="char-class">기상술사</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,702.50</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">113317</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">44</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/3/550DC62F584F058C7D8ACE3AA9E352280E560C365460E61E1B4C66486F9E4EF3.jpg?v=20251228140005"/>
+<div class="char-info">
+<div class="char-name">기상학과추상우</div>
+<div class="char-class">기상술사</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,700.00</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">123271</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">45</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/6/254C0DB49342402ABEA41188F03761C06B051D8B98E44AC21021259E998355C3.jpg?v=20251223033300"/>
+<div class="char-info">
+<div class="char-name">공대남</div>
+<div class="char-class">소서리스</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,700.00</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">117269</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">46</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/7/8F053413B03381CE41A050712CFF9A16EE293B514C5F6AA189B1EF8A19CE6ED2.jpg?v=20251228121320"/>
+<div class="char-info">
+<div class="char-name">강기석</div>
+<div class="char-class">버서커</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,692.16</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">110433</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">47</div>
+<img alt="img" class="char-img" src="https://img.lostark.co.kr/armory/6/2F000BC9D6C7BE013B02BAEB26FB7AA536BFDA9C08CF39211DE3EDE6C694DCF4.jpg?v=20250724101146"/>
+<div class="char-info">
+<div class="char-name">베이비블러쉬</div>
+<div class="char-class">건슬링어</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,645.83</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">89951</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">48</div>
+<img alt="img" class="char-img" src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png"/>
+<div class="char-info">
+<div class="char-name">양호시</div>
+<div class="char-class">환수사</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,640.00</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">73619</div>
+</div>
+</div>
+<div class="rank-row">
+<div class="rank-num">49</div>
+<img alt="img" class="char-img" src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png"/>
+<div class="char-info">
+<div class="char-name">리핼</div>
+<div class="char-class">서머너</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">아이템 레벨</span>
+<div class="stat-value level-val">1,370.00</div>
+</div>
+<div class="stat-box">
+<span class="stat-label">공격력</span>
+<div class="stat-value atk-val">16083</div>
+</div>
+</div>
+</div>
+<div class="update-time">마지막 업데이트: 2025-12-29 04:33:20</div>
+</div>
+</body>
+</html>
