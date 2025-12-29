@@ -119,7 +119,7 @@ def main():
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>로스트아크 산책회 랭킹</title>
+        <title>로스트아크 놀자에요 랭킹</title>
         <style>
             body {{
                 font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
@@ -171,7 +171,7 @@ def main():
     </head>
     <body>
         <div class="container">
-            <h2>🏆 산책회 전투력 측정기</h2>
+            <h2>🏆 놀자에요 전투력 측정기</h2>
             <div class="list-area">
     """
     
