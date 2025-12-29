@@ -20,26 +20,59 @@
         .sort-btn:hover { background-color: #35353a; color: #fff; }
         .sort-btn.active { background-color: #35353a; color: #ffca5c; border-color: #ffca5c; font-weight: bold; }
 
-        /* 리스트 스타일 */
+        /* =========================================
+           기본 리스트 스타일 (4등부터 적용)
+        ========================================= */
         .rank-row { display: flex; align-items: center; background-color: #2a2a2e; margin-bottom: 10px; padding: 10px 20px; border-radius: 8px; border: 1px solid #3a3a40; transition: 0.2s; }
         .rank-row:hover { background-color: #35353a; transform: translateY(-2px); }
+        
         .rank-num { width: 40px; font-size: 1.2em; font-weight: bold; color: #888; text-align: center; }
         .rank-1 { color: #ffd700; } .rank-2 { color: #c0c0c0; } .rank-3 { color: #cd7f32; }
-        .char-img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #555; object-fit: cover; margin: 0 20px; background: #000; }
+        
+        .char-img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #555; object-fit: cover; margin: 0 20px; background: #000; transition: 0.2s; }
+        
         .char-info { flex-grow: 1; }
         .char-name { font-size: 1.1em; font-weight: bold; color: #fff; }
         .char-class { font-size: 0.85em; color: #aaa; margin-top: 2px; }
+        
         .stat-box { width: 100px; text-align: right; margin-left: 10px; }
         .stat-label { font-size: 0.75em; color: #777; display: block; }
         .stat-value { font-size: 1.1em; font-weight: bold; }
         .level-val { color: #00d1ce; }
         .battle-val { color: #ff6b6b; }
+
+        /* =========================================
+           ⭐ Top 3 전용 스타일 (여기가 핵심!)
+        ========================================= */
+        /* 1~3등 칸 전체 크기 및 디자인 */
+        .rank-row.top-rank {
+            padding: 25px 30px; /* 패딩을 크게 키움 */
+            background-color: #303035; /* 배경을 조금 더 밝게 */
+            border: 2px solid #ffca5c; /* 금색 테두리 추가 */
+            margin-bottom: 25px; /* 간격 넓힘 */
+            box-shadow: 0 5px 15px rgba(255, 202, 92, 0.2); /* 금색 그림자 */
+        }
+        /* 이미지 크기 2배 */
+        .top-rank .char-img { width: 100px; height: 100px; border-width: 3px; border-color: #ffca5c; }
+        
+        /* 글자 크기들 대폭 확대 */
+        .top-rank .rank-num { font-size: 2.5em; width: 60px; }
+        .top-rank .char-name { font-size: 1.8em; }
+        .top-rank .char-class { font-size: 1.2em; margin-top: 5px; }
+        .top-rank .stat-box { width: 140px; }
+        .top-rank .stat-label { font-size: 1em; }
+        .top-rank .stat-value { font-size: 1.6em; }
+
+        
         .update-time { text-align: center; font-size: 0.8em; color: #555; margin-top: 20px; }
         
         @media (max-width: 600px) {
             .rank-row { flex-wrap: wrap; padding: 15px; }
             .char-img { width: 40px; height: 40px; margin: 0 10px; }
+            /* 모바일에서는 Top3 이미지도 조금 조절 */
+            .top-rank .char-img { width: 80px; height: 80px; margin-bottom: 10px;} 
             .stat-box { width: 45%; margin: 10px 0 0 0; text-align: left; }
+            .top-rank .stat-box { width: 45%; }
         }
     </style>
 </head>
@@ -48,19 +81,16 @@
         <h2>🏆 놀자에요 전투력 측정기</h2>
         
         <div class="btn-group">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKqid6q-43CJH8MKZXatNPkRSm74Yx7FhIL3YwiupV9WNlng/viewform" target="_blank" class="reg-btn">➕ 내 캐릭터 등록하기</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScz3t_mQk7kZJ2x1a4c5b6d7e8f9g0h1i2j3k4l5m6n7o8p9/viewform" target="_blank" class="reg-btn">➕ 내 캐릭터 등록하기</a>
         </div>
 
         <div class="sort-area">
-            <button class="sort-btn active" onclick="renderList('power', this)">⚔️ 전투력순</button>
+            <button class="sort-btn active" onclick="renderList('power', this)">⚔️ 공격력순</button>
             <button class="sort-btn" onclick="renderList('level', this)">📊 레벨순</button>
         </div>
 
         <div class="list-area" id="listArea">
-            <p style="text-align:center; padding: 20px; color: #777;">
-                데이터를 불러오는 중입니다...<br>
-                (잠시만 기다려주세요)
-            </p>
+            <p style="text-align:center; padding: 20px; color: #777;">데이터를 불러오는 중입니다...</p>
         </div>
         
         <div class="update-time" id="updateTime"></div>
@@ -69,38 +99,21 @@
     <script>
         let globalData = [];
 
-        // 1. 놀자에요 데이터(nolja_data.json) 가져오기
         async function loadData() {
             try {
-                // 파이썬이 만든 json 파일을 읽어옵니다.
-                // 만약 파일이 아직 안 만들어졌다면 에러가 날 수 있습니다.
                 const response = await fetch('nolja_data.json');
-                
-                if (!response.ok) {
-                    throw new Error("파일을 찾을 수 없음");
-                }
-
+                if (!response.ok) throw new Error("파일 없음");
                 const json = await response.json();
                 globalData = json.characters;
                 document.getElementById('updateTime').innerText = "마지막 업데이트: " + json.updated_at;
-                
-                // 데이터 로드 성공 시 바로 렌더링
                 renderList('power', document.querySelector('.sort-btn.active')); 
-
             } catch (error) {
                 console.error("데이터 로드 실패:", error);
-                document.getElementById('listArea').innerHTML = `
-                    <p style='text-align:center; color:#ff6b6b;'>
-                        📉 아직 데이터가 없습니다.<br>
-                        'nolja.txt' 파일을 만들거나,<br>
-                        자동 업데이트(1시간)를 기다려주세요!
-                    </p>`;
+                document.getElementById('listArea').innerHTML = `<p style='text-align:center; color:#ff6b6b;'>📉 데이터가 없습니다. 잠시 후 다시 시도해주세요.</p>`;
             }
         }
 
-        // 2. 화면 그리기 함수
         function renderList(criteria, btn) {
-            // 버튼 활성화 스타일 처리
             if(btn) {
                 document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
@@ -114,27 +127,37 @@
                 return;
             }
 
-            // 정렬 로직
             globalData.sort((a, b) => {
                 let valA = parseFloat(String(a[criteria === 'level' ? 'itemLevel' : 'combatPower']).replace(/,/g, '')) || 0;
                 let valB = parseFloat(String(b[criteria === 'level' ? 'itemLevel' : 'combatPower']).replace(/,/g, '')) || 0;
                 return valB - valA;
             });
 
-            // 리스트 생성
             globalData.forEach((char, index) => {
                 const rank = index + 1;
-                const rankClass = rank <= 3 ? `rank-${rank}` : '';
                 
-                // 데이터가 없을 때 표시할 기본값 처리
+                // ⭐ 1, 2, 3등인지 확인하는 변수
+                const isTop3 = rank <= 3;
+                // ⭐ Top3면 'top-rank' 클래스를 추가하고, 아니면 빈칸
+                const rowClass = isTop3 ? 'top-rank' : '';
+                // 순위별 색상 클래스 (기존 유지)
+                const rankNumClass = isTop3 ? `rank-${rank}` : '';
+                
                 const jobName = char.job || "정보없음";
                 const itemLevel = char.itemLevel || "0.00";
-                const combatPower = char.combatPower || "0";
                 const charImg = char.img || "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png";
 
+                // 공격력 '만' 단위 변환 (이전 요청 사항 적용)
+                const rawPower = parseInt(String(char.combatPower).replace(/,/g, '')) || 0;
+                let displayPower = char.combatPower;
+                if (rawPower >= 10000) {
+                    displayPower = (rawPower / 10000).toFixed(1) + '만';
+                }
+
+                // HTML 조립 (부모 div에 ${rowClass}가 추가됨)
                 const html = `
-                <div class="rank-row">
-                    <div class="rank-num ${rankClass}">${rank}</div>
+                <div class="rank-row ${rowClass}">
+                    <div class="rank-num ${rankNumClass}">${rank}</div>
                     <img src="${charImg}" class="char-img" onerror="this.src='https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png'">
                     <div class="char-info">
                         <div class="char-name">${char.name}</div>
@@ -145,15 +168,14 @@
                         <div class="stat-value level-val">${itemLevel}</div>
                     </div>
                     <div class="stat-box">
-                        <span class="stat-label">전투력</span>
-                        <div class="stat-value battle-val">${combatPower}</div>
+                        <span class="stat-label">공격력</span>
+                        <div class="stat-value battle-val">${displayPower}</div>
                     </div>
                 </div>`;
                 listArea.innerHTML += html;
             });
         }
 
-        // 시작!
         loadData();
     </script>
 </body>
