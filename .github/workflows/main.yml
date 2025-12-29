@@ -43,4 +43,5 @@ jobs:
           git config --global user.email "action@github.com"
           git add .
           git commit -m "Update ranking" || echo "No changes to commit"
+          git pull --rebase origin main   # 👈 [핵심] 최신 내용을 먼저 받아옵니다!
           git push
