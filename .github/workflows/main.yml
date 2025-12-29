@@ -41,7 +41,15 @@ jobs:
         run: |
           git config --global user.name "GitHub Action"
           git config --global user.email "action@github.com"
+          
+          # 현재 변경사항(새로 만든 json 등)을 스테이지에 올림
           git add .
+          
+          # 커밋할 게 없으면 스킵, 있으면 커밋
           git commit -m "Update ranking" || echo "No changes to commit"
-          git pull --rebase origin main   # 👈 [핵심] 최신 내용을 먼저 받아옵니다!
-          git push
+          
+          # [핵심] 최신 코드를 가져오되, 충돌 나면 내꺼(로봇이 만든거) 우선으로 덮어씀!
+          git pull origin main --strategy-option=theirs --rebase
+          
+          # 강제로 밀어넣기
+          git push origin main
