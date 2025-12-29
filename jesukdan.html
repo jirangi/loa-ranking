@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-
 <html lang="ko">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>제숙단 전투력 측정기</title>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제숙단 전투력 측정기</title>
+    <style>
         body { font-family: 'Apple SD Gothic Neo', sans-serif; background-color: #121214; color: #e0e0e0; display: flex; justify-content: center; padding: 20px; margin: 0; }
         .container { max-width: 900px; width: 100%; background-color: #1e1e20; border-radius: 12px; padding: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.5); }
         h2 { text-align: center; color: #ffca5c; margin-bottom: 20px; }
+        
+        /* 정렬 버튼 스타일 */
+        .sort-area { text-align: right; margin-bottom: 15px; }
+        .sort-btn { background-color: #2a2a2e; border: 1px solid #3a3a40; color: #aaa; padding: 5px 12px; border-radius: 6px; cursor: pointer; margin-left: 5px; font-size: 0.9em; }
+        .sort-btn:hover { background-color: #35353a; color: #fff; }
+        .sort-btn.active { background-color: #35353a; color: #ffca5c; border-color: #ffca5c; font-weight: bold; }
+
         .rank-row { display: flex; align-items: center; background-color: #2a2a2e; margin-bottom: 10px; padding: 10px 20px; border-radius: 8px; border: 1px solid #3a3a40; transition: 0.2s; }
         .rank-row:hover { background-color: #35353a; transform: translateY(-2px); }
         .rank-num { width: 40px; font-size: 1.2em; font-weight: bold; color: #888; text-align: center; }
         .rank-1 { color: #ffd700; } .rank-2 { color: #c0c0c0; } .rank-3 { color: #cd7f32; }
-        /* 초기 이미지는 로아 기본 이미지로 설정 (스크립트가 교체함) */
         .char-img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #555; object-fit: cover; margin: 0 20px; background: #000; }
         .char-info { flex-grow: 1; }
         .char-name { font-size: 1.1em; font-weight: bold; color: #fff; }
@@ -32,203 +37,166 @@
     </style>
 </head>
 <body>
-<div class="container">
-<h2>🏆 제숙단 전투력 측정기</h2>
-<div class="list-area">
-<div class="rank-row">
-<div class="rank-num rank-1">1</div>
-<img class="char-img" src="https://img.lostark.co.kr/armory/9/B440D21E0E1EA61FFE79D1F1F3DDF3AEFC4FACCEEDD5BC72CECAF06E640697CE.jpg?v=20251228080727"/>
-<div class="char-info">
-<div class="char-name">누리가온미르</div>
-<div class="char-class">불러오는 중...</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">아이템 레벨</span>
-<div class="stat-value level-val">0.00</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">전투력</span>
-<div class="stat-value battle-val">1,242.64</div>
-</div>
-</div>
-<div class="rank-row">
-<div class="rank-num rank-2">2</div>
-<img class="char-img" src="https://img.lostark.co.kr/armory/6/64574FEA98F900D2145BA65462A67E9BCE4B98334EBCC274596BF346A0406080.jpg?v=20251228093942"/>
-<div class="char-info">
-<div class="char-name">통근육</div>
-<div class="char-class">불러오는 중...</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">아이템 레벨</span>
-<div class="stat-value level-val">0.00</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">전투력</span>
-<div class="stat-value battle-val">4,510.91</div>
-</div>
-</div>
-<div class="rank-row">
-<div class="rank-num rank-3">3</div>
-<img class="char-img" src="https://img.lostark.co.kr/armory/6/04378648778779EB892E5BE4B87D456F9EE0D05CDFA0558B2CB5E82D5988E7AA.jpg?v=20251221122157"/>
-<div class="char-info">
-<div class="char-name">민땁</div>
-<div class="char-class">불러오는 중...</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">아이템 레벨</span>
-<div class="stat-value level-val">0.00</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">전투력</span>
-<div class="stat-value battle-val">3,750.44</div>
-</div>
-</div>
-<div class="rank-row">
-<div class="rank-num">4</div>
-<img class="char-img" src="https://img.lostark.co.kr/armory/2/AF95D33DD37850C4880E83DF2B09E90E92A10B789302A9C4775622166329D579.jpg?v=20251225065705"/>
-<div class="char-info">
-<div class="char-name">백곰워붕장</div>
-<div class="char-class">불러오는 중...</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">아이템 레벨</span>
-<div class="stat-value level-val">0.00</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">전투력</span>
-<div class="stat-value battle-val">1,557.49</div>
-</div>
-</div>
-<div class="rank-row">
-<div class="rank-num">5</div>
-<img class="char-img" src="https://img.lostark.co.kr/armory/1/69EB6CCDBD50DE0194FEB6E85DC2B47E1BCF1A55ADF0FBC3A58C0A2BB17E5C18.jpg?v=20251228030111"/>
-<div class="char-info">
-<div class="char-name">비상과자</div>
-<div class="char-class">불러오는 중...</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">아이템 레벨</span>
-<div class="stat-value level-val">0.00</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">전투력</span>
-<div class="stat-value battle-val">3,585.63</div>
-</div>
-</div>
-<div class="rank-row">
-<div class="rank-num">6</div>
-<img class="char-img" src="https://img.lostark.co.kr/armory/2/8540D4C1C058DA77C05AAB7EBFC3E439F5A4355971E87AE56682B6BD50558B0B.jpg?v=20251228100305"/>
-<div class="char-info">
-<div class="char-name">핑뚝이환수사</div>
-<div class="char-class">불러오는 중...</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">아이템 레벨</span>
-<div class="stat-value level-val">0.00</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">전투력</span>
-<div class="stat-value battle-val">3,443.85</div>
-</div>
-</div>
-<div class="rank-row">
-<div class="rank-num">7</div>
-<img class="char-img" src="https://img.lostark.co.kr/armory/3/9ED42ABF3F697068B43405A4CDFD7007113E7A10C6FC020BA65069F50994D172.jpg?v=20251228190501"/>
-<div class="char-info">
-<div class="char-name">최여운</div>
-<div class="char-class">불러오는 중...</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">아이템 레벨</span>
-<div class="stat-value level-val">0.00</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">전투력</span>
-<div class="stat-value battle-val">3,716.78</div>
-</div>
-</div>
-<div class="rank-row">
-<div class="rank-num">8</div>
-<img class="char-img" src="https://img.lostark.co.kr/armory/3/7E4D5C28F32E31AE20E60C5B1EF24B19646EB94825414C1A06828153FA7621D9.jpg?v=20251228045251"/>
-<div class="char-info">
-<div class="char-name">뀨잉워로드</div>
-<div class="char-class">불러오는 중...</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">아이템 레벨</span>
-<div class="stat-value level-val">0.00</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">전투력</span>
-<div class="stat-value battle-val">3,742.44</div>
-</div>
-</div>
-<div class="rank-row">
-<div class="rank-num">9</div>
-<img class="char-img" src="https://img.lostark.co.kr/armory/1/45756891C04FF19C89FCAFE1738B720D283D696E25EB5DAB37830C9047BB1F4C.jpg?v=20251229041429"/>
-<div class="char-info">
-<div class="char-name">낌하빈</div>
-<div class="char-class">불러오는 중...</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">아이템 레벨</span>
-<div class="stat-value level-val">0.00</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">전투력</span>
-<div class="stat-value battle-val">5,494.04</div>
-</div>
-</div>
-<div class="rank-row">
-<div class="rank-num">10</div>
-<img class="char-img" src="https://img.lostark.co.kr/armory/8/F714E8E763741320D85F81F0FB1A7C5BDA799EB34A671C12A84CC191AA9448FB.jpg?v=20251228005051"/>
-<div class="char-info">
-<div class="char-name">간지버거</div>
-<div class="char-class">불러오는 중...</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">아이템 레벨</span>
-<div class="stat-value level-val">0.00</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">전투력</span>
-<div class="stat-value battle-val">1,022.35</div>
-</div>
-</div>
-<div class="rank-row">
-<div class="rank-num">11</div>
-<img class="char-img" src="https://img.lostark.co.kr/armory/4/E49C0C710CC48E17E7F135C7B45B29D642005ECD2819400A7AFF465ADED1215C.jpg?v=20251227220019"/>
-<div class="char-info">
-<div class="char-name">피학증삭제하면닉변함</div>
-<div class="char-class">불러오는 중...</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">아이템 레벨</span>
-<div class="stat-value level-val">0.00</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">전투력</span>
-<div class="stat-value battle-val">4,706.23</div>
-</div>
-</div>
-<div class="rank-row">
-<div class="rank-num">12</div>
-<img class="char-img" src="https://img.lostark.co.kr/armory/3/37369041D74BA25417AD2F0C0E38C2DB47AACAFF864D49D8CBAF5BCBDB886D81.jpg?v=20251227161641"/>
-<div class="char-info">
-<div class="char-name">힐주세요형님해봐</div>
-<div class="char-class">불러오는 중...</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">아이템 레벨</span>
-<div class="stat-value level-val">0.00</div>
-</div>
-<div class="stat-box">
-<span class="stat-label">전투력</span>
-<div class="stat-value battle-val">2,867.67</div>
-</div>
-</div>
-</div>
-<div class="update-time">마지막 업데이트: 2025-12-29 05:23:56</div>
-</div>
+    <div class="container">
+        <h2>🏆 제숙단 전투력 측정기</h2>
+        
+        <div class="sort-area">
+            <button class="sort-btn active" onclick="sortList('power', this)">⚔️ 전투력순</button>
+            <button class="sort-btn" onclick="sortList('level', this)">📊 레벨순</button>
+        </div>
+
+        <div class="list-area" id="listArea">
+            <div class="rank-row">
+                <div class="rank-num"></div>
+                <img src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png" class="char-img">
+                <div class="char-info"><div class="char-name">누리가온미르</div><div class="char-class">-</div></div>
+                <div class="stat-box"><span class="stat-label">아이템 레벨</span><div class="stat-value level-val">0</div></div>
+                <div class="stat-box"><span class="stat-label">전투력</span><div class="stat-value battle-val">0</div></div>
+            </div>
+
+            <div class="rank-row">
+                <div class="rank-num"></div>
+                <img src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png" class="char-img">
+                <div class="char-info"><div class="char-name">통근육</div><div class="char-class">-</div></div>
+                <div class="stat-box"><span class="stat-label">아이템 레벨</span><div class="stat-value level-val">0</div></div>
+                <div class="stat-box"><span class="stat-label">전투력</span><div class="stat-value battle-val">0</div></div>
+            </div>
+
+            <div class="rank-row">
+                <div class="rank-num"></div>
+                <img src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png" class="char-img">
+                <div class="char-info"><div class="char-name">민땁</div><div class="char-class">-</div></div>
+                <div class="stat-box"><span class="stat-label">아이템 레벨</span><div class="stat-value level-val">0</div></div>
+                <div class="stat-box"><span class="stat-label">전투력</span><div class="stat-value battle-val">0</div></div>
+            </div>
+
+            <div class="rank-row">
+                <div class="rank-num"></div>
+                <img src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png" class="char-img">
+                <div class="char-info"><div class="char-name">백곰워붕장</div><div class="char-class">-</div></div>
+                <div class="stat-box"><span class="stat-label">아이템 레벨</span><div class="stat-value level-val">0</div></div>
+                <div class="stat-box"><span class="stat-label">전투력</span><div class="stat-value battle-val">0</div></div>
+            </div>
+
+            <div class="rank-row">
+                <div class="rank-num"></div>
+                <img src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png" class="char-img">
+                <div class="char-info"><div class="char-name">비상과자</div><div class="char-class">-</div></div>
+                <div class="stat-box"><span class="stat-label">아이템 레벨</span><div class="stat-value level-val">0</div></div>
+                <div class="stat-box"><span class="stat-label">전투력</span><div class="stat-value battle-val">0</div></div>
+            </div>
+
+            <div class="rank-row">
+                <div class="rank-num"></div>
+                <img src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png" class="char-img">
+                <div class="char-info"><div class="char-name">핑뚝이환수사</div><div class="char-class">-</div></div>
+                <div class="stat-box"><span class="stat-label">아이템 레벨</span><div class="stat-value level-val">0</div></div>
+                <div class="stat-box"><span class="stat-label">전투력</span><div class="stat-value battle-val">0</div></div>
+            </div>
+
+            <div class="rank-row">
+                <div class="rank-num"></div>
+                <img src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png" class="char-img">
+                <div class="char-info"><div class="char-name">최여운</div><div class="char-class">-</div></div>
+                <div class="stat-box"><span class="stat-label">아이템 레벨</span><div class="stat-value level-val">0</div></div>
+                <div class="stat-box"><span class="stat-label">전투력</span><div class="stat-value battle-val">0</div></div>
+            </div>
+
+            <div class="rank-row">
+                <div class="rank-num"></div>
+                <img src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png" class="char-img">
+                <div class="char-info"><div class="char-name">뀨잉워로드</div><div class="char-class">-</div></div>
+                <div class="stat-box"><span class="stat-label">아이템 레벨</span><div class="stat-value level-val">0</div></div>
+                <div class="stat-box"><span class="stat-label">전투력</span><div class="stat-value battle-val">0</div></div>
+            </div>
+
+            <div class="rank-row">
+                <div class="rank-num"></div>
+                <img src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png" class="char-img">
+                <div class="char-info"><div class="char-name">낌하빈</div><div class="char-class">-</div></div>
+                <div class="stat-box"><span class="stat-label">아이템 레벨</span><div class="stat-value level-val">0</div></div>
+                <div class="stat-box"><span class="stat-label">전투력</span><div class="stat-value battle-val">0</div></div>
+            </div>
+
+            <div class="rank-row">
+                <div class="rank-num"></div>
+                <img src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png" class="char-img">
+                <div class="char-info"><div class="char-name">간지버거</div><div class="char-class">-</div></div>
+                <div class="stat-box"><span class="stat-label">아이템 레벨</span><div class="stat-value level-val">0</div></div>
+                <div class="stat-box"><span class="stat-label">전투력</span><div class="stat-value battle-val">0</div></div>
+            </div>
+
+            <div class="rank-row">
+                <div class="rank-num"></div>
+                <img src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png" class="char-img">
+                <div class="char-info"><div class="char-name">피학증삭제하면닉변함</div><div class="char-class">-</div></div>
+                <div class="stat-box"><span class="stat-label">아이템 레벨</span><div class="stat-value level-val">0</div></div>
+                <div class="stat-box"><span class="stat-label">전투력</span><div class="stat-value battle-val">0</div></div>
+            </div>
+
+            <div class="rank-row">
+                <div class="rank-num"></div>
+                <img src="https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png" class="char-img">
+                <div class="char-info"><div class="char-name">힐주세요형님해봐</div><div class="char-class">-</div></div>
+                <div class="stat-box"><span class="stat-label">아이템 레벨</span><div class="stat-value level-val">0</div></div>
+                <div class="stat-box"><span class="stat-label">전투력</span><div class="stat-value battle-val">0</div></div>
+            </div>
+
+        </div>
+        <div class="update-time">데이터 수집 대기 중...</div>
+    </div>
+
+    <script>
+        function sortList(criteria, btn) {
+            const listArea = document.getElementById('listArea');
+            const rows = Array.from(listArea.getElementsByClassName('rank-row'));
+            
+            // 버튼 활성화 스타일 변경
+            if(btn) {
+                document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+
+            rows.sort((a, b) => {
+                let aVal, bVal;
+                
+                if (criteria === 'level') {
+                    // 레벨 가져오기 (콤마 제거)
+                    const aText = a.querySelector('.level-val').innerText.replace(/,/g, '');
+                    const bText = b.querySelector('.level-val').innerText.replace(/,/g, '');
+                    aVal = parseFloat(aText) || 0;
+                    bVal = parseFloat(bText) || 0;
+                } else {
+                    // 전투력 가져오기 (콤마 제거)
+                    const aText = a.querySelector('.battle-val').innerText.replace(/,/g, '');
+                    const bText = b.querySelector('.battle-val').innerText.replace(/,/g, '');
+                    aVal = parseFloat(aText) || 0;
+                    bVal = parseFloat(bText) || 0;
+                }
+                
+                return bVal - aVal; // 내림차순 정렬
+            });
+
+            // 화면에 다시 그리기 및 순위 재매김
+            rows.forEach((row, index) => {
+                listArea.appendChild(row);
+                
+                const rankNum = row.querySelector('.rank-num');
+                rankNum.innerText = index + 1;
+                
+                // 순위별 색상 클래스 초기화 및 재설정
+                rankNum.classList.remove('rank-1', 'rank-2', 'rank-3');
+                if (index === 0) rankNum.classList.add('rank-1');
+                if (index === 1) rankNum.classList.add('rank-2');
+                if (index === 2) rankNum.classList.add('rank-3');
+            });
+        }
+
+        // 페이지 로드 시 자동으로 전투력순 정렬 실행
+        window.onload = function() {
+            // 처음엔 전투력 버튼이 활성화된 상태로 정렬 수행
+            sortList('power', null);
+        };
+    </script>
 </body>
 </html>
