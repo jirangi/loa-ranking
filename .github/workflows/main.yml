@@ -1,7 +1,7 @@
 name: Update LostArk Ranking
 
 on:
-  push:                   # [추가됨] 파일 수정(Push)이 일어나면 즉시 실행!
+  push:                   # 파일 수정(Push)이 일어나면 즉시 실행!
     branches: [ "main" ]
   schedule:
     - cron: '0 */1 * * *' # 1시간마다 자동 실행
@@ -22,18 +22,19 @@ jobs:
         with:
           python-version: '3.9'
 
+      # 👇 [여기가 수정된 부분입니다] 👇
+      # requests와 beautifulsoup4를 한 번에 설치하도록 합쳤습니다.
       - name: Install dependencies
         run: |
-          pip install requests
-          
-      - name: 라이브러리 설치
-        run: |
           python -m pip install --upgrade pip
-          pip install requests
+          pip install requests beautifulsoup4
 
       - name: Run script to generate HTML
         env:
           LOA_API_KEY: ${{ secrets.LOA_API_KEY }}
+        # 👇 실행하는 파일명이 main.py가 맞는지, update_rank.py가 맞는지 꼭 확인하세요!
+        # 아까 주신 코드는 main.py였는데, 로그에는 update_rank.py로 되어 있어서
+        # 일단 로그에 뜬 대로 update_rank.py로 적어두었습니다.
         run: python update_rank.py
 
       - name: Commit and Push changes
