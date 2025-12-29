@@ -39,8 +39,11 @@ def get_info(nickname):
                 debug_logs.append(f"❌ {nickname}: 데이터 없음 (null)")
                 return None
             
-            if 'ItemMaxLevel' not in data:
-                debug_logs.append(f"🛑 {nickname}: {str(data)}")
+            # [수정됨] ItemMaxLevel이 없으면 ItemAvgLevel을 가져오도록 변경
+            level_str = data.get('ItemMaxLevel', data.get('ItemAvgLevel'))
+            
+            if not level_str:
+                debug_logs.append(f"🛑 {nickname}: 레벨 정보 없음 - {str(data)}")
                 return None
 
             attack_power = "-"
@@ -57,7 +60,7 @@ def get_info(nickname):
             return {
                 'name': nickname,
                 'class': data['CharacterClassName'],
-                'level': float(data['ItemMaxLevel'].replace(',', '')),
+                'level': float(level_str.replace(',', '')),
                 'atk': attack_power,
                 'img': img_url
             }
@@ -117,7 +120,7 @@ def main():
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>로스트아크 놀자에요 랭킹</title>
+        <title>놀자에요 랭킹</title>
         <style>
             body {{ font-family: 'Apple SD Gothic Neo', sans-serif; background-color: #121214; color: #e0e0e0; display: flex; justify-content: center; padding: 20px; margin: 0; }}
             .container {{ max-width: 900px; width: 100%; background-color: #1e1e20; border-radius: 12px; padding: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.5); }}
