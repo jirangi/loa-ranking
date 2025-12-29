@@ -10,7 +10,7 @@ import time
 RAW_API_KEY = os.environ.get('LOA_API_KEY', '')
 API_KEY = RAW_API_KEY.replace("Bearer ", "").replace("bearer ", "").strip()
 
-# 👇 여기가 핵심입니다. 두 파일을 모두 적어줘야 합니다.
+# 두 파일 모두 업데이트
 TARGET_FILES = ["index.html", "jesukdan.html"]
 
 if not API_KEY:
@@ -57,19 +57,31 @@ for file_name in TARGET_FILES:
                 data = response.json()
                 profile = data.get('ArmoryProfile', {})
                 
-                # A. 전투력 업데이트
+                # A. [전투력] 업데이트
                 combat_power = profile.get('CombatPower', '0')
                 val_div = row.select_one('.battle-val')
                 if val_div:
                     val_div.string = str(combat_power)
 
-                # B. 캐릭터 이미지 자동 업데이트
+                # B. [아이템 레벨] 업데이트 (추가됨!)
+                item_level = profile.get('ItemMaxLevel', '0.00')
+                lvl_div = row.select_one('.level-val')
+                if lvl_div:
+                    lvl_div.string = str(item_level)
+
+                # C. [직업] 업데이트 (추가됨!)
+                char_class = profile.get('CharacterClassName', '')
+                class_div = row.select_one('.char-class')
+                if class_div and char_class:
+                    class_div.string = char_class
+
+                # D. [캐릭터 이미지] 업데이트
                 img_url = profile.get('CharacterImage')
                 img_tag = row.select_one('.char-img')
                 if img_url and img_tag:
                     img_tag['src'] = img_url
 
-                print(f"✅ 완료 ({combat_power})")
+                print(f"✅ 완료 (Lv.{item_level} / {combat_power})")
                 
             elif response.status_code == 429:
                 print("⏳ (Too Many Requests) 5초 대기...")
