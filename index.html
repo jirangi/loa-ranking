@@ -1,75 +1,19 @@
 
-    <!DOCTYPE html>
-    <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>로스트아크 산책회 랭킹</title>
-        <style>
-            body {
-                font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-                background-color: #121214;
-                color: #e0e0e0;
-                display: flex;
-                justify-content: center;
-                padding: 20px;
-                margin: 0;
-            }
-            .container {
-                max-width: 900px;
-                width: 100%;
-                background-color: #1e1e20;
-                border-radius: 12px;
-                padding: 20px;
-                box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-            }
-            h2 { text-align: center; color: #ffca5c; margin-bottom: 20px; }
-            
-            .rank-row {
-                display: flex;
-                align-items: center;
-                background-color: #2a2a2e;
-                margin-bottom: 10px;
-                padding: 10px 20px;
-                border-radius: 8px;
-                border: 1px solid #3a3a40;
-                transition: 0.2s;
-            }
-            .rank-row:hover { background-color: #35353a; transform: translateY(-2px); }
-            
-            .rank-num { width: 40px; font-size: 1.2em; font-weight: bold; color: #888; text-align: center; }
-            .rank-1 { color: #ffd700; } .rank-2 { color: #c0c0c0; } .rank-3 { color: #cd7f32; }
-            
-            .char-img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #555; object-fit: cover; margin: 0 20px; background: #000; }
-            
-            .char-info { flex-grow: 1; }
-            .char-name { font-size: 1.1em; font-weight: bold; color: #fff; }
-            .char-class { font-size: 0.85em; color: #aaa; margin-top: 2px; }
-            
-            .stat-box { width: 100px; text-align: right; margin-left: 10px; }
-            .stat-label { font-size: 0.75em; color: #777; display: block; }
-            .stat-value { font-size: 1.1em; font-weight: bold; }
-            .level-val { color: #00d1ce; }
-            .atk-val { color: #ff6b6b; }
-            
-            .update-time { text-align: center; font-size: 0.8em; color: #555; margin-top: 20px; }
-            
-            /* 모바일 대응 */
-            @media (max-width: 600px) {
-                .rank-row { flex-wrap: wrap; padding: 15px; }
-                .char-img { width: 40px; height: 40px; margin: 0 10px; }
-                .stat-box { width: 45%; margin: 10px 0 0 0; text-align: left; }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h2>🏆 산책회 전투력 측정기</h2>
-            <div class="list-area">
-    
+        <!DOCTYPE html>
+        <html lang="ko">
+        <body style="background-color: #222; color: white; padding: 20px; font-family: sans-serif;">
+            <h1 style="color: #ff6b6b;">⚠️ 데이터 조회 실패</h1>
+            <p>서버 배경색은 바뀌었지만, 캐릭터 데이터를 가져오지 못했습니다.</p>
+            <div style="background: #333; padding: 15px; border-radius: 10px;">
+                <h3>🔍 실패 원인 분석 로그:</h3>
+                <p>💥 베이비블러쉬: 프로그램 에러 - 'ItemMaxLevel'<br>💥 삼동서머너: 프로그램 에러 - 'ItemMaxLevel'<br>💥 씩씩: 프로그램 에러 - 'ItemMaxLevel'<br>💥 레닌저생화학: 프로그램 에러 - 'ItemMaxLevel'<br>💥 본과호소인: 프로그램 에러 - 'ItemMaxLevel'<br>💥 부추쨩: 프로그램 에러 - 'ItemMaxLevel'<br>💥 매일좋은날: 프로그램 에러 - 'ItemMaxLevel'<br>💥 에겐남다다규: 프로그램 에러 - 'ItemMaxLevel'<br>💥 하니쿠: 프로그램 에러 - 'ItemMaxLevel'<br>💥 브레이커쥬니: 프로그램 에러 - 'ItemMaxLevel'</p>
+                <p>...</p>
             </div>
-            <div class="update-time">마지막 업데이트: 2025-12-29 01:13:11</div>
-        </div>
-    </body>
-    </html>
-    
+            <h3 style="margin-top:20px;">💡 해결 방법:</h3>
+            <ul>
+                <li>로그에 <b>'401'</b>이 뜬다면: API 키가 잘못된 것입니다. Secrets에서 키를 다시 등록하세요.</li>
+                <li>로그에 <b>'null'</b>이 뜬다면: 닉네임이 실제 게임에 없는 이름입니다.</li>
+            </ul>
+        </body>
+        </html>
+        
