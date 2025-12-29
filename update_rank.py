@@ -63,13 +63,17 @@ for file_name in TARGET_FILES:
                 if val_div:
                     val_div.string = str(combat_power)
 
-                # B. [아이템 레벨] 업데이트 (추가됨!)
-                item_level = profile.get('ItemMaxLevel', '0.00')
+                # B. [아이템 레벨] 업데이트 (보완됨: 안전장치 추가)
+                # 1순위: ItemMaxLevel, 2순위: ItemAvgLevel, 실패시: 0.00
+                item_level = profile.get('ItemMaxLevel')
+                if not item_level:
+                    item_level = profile.get('ItemAvgLevel', '0.00')
+                
                 lvl_div = row.select_one('.level-val')
                 if lvl_div:
                     lvl_div.string = str(item_level)
 
-                # C. [직업] 업데이트 (추가됨!)
+                # C. [직업] 업데이트
                 char_class = profile.get('CharacterClassName', '')
                 class_div = row.select_one('.char-class')
                 if class_div and char_class:
