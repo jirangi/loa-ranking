@@ -64,13 +64,45 @@
 
         .update-time { text-align: center; font-size: 0.8em; color: #555; margin-top: 20px; }
         
+/* ▼▼▼ 모바일 화면 전용 스타일 수정 (여기부터 복사) ▼▼▼ */
         @media (max-width: 600px) {
-            .rank-row { flex-wrap: wrap; padding: 15px; }
+            .rank-row { 
+                flex-wrap: wrap; 
+                padding: 15px; 
+                justify-content: space-between; /* 요소들 간격 균등 배치 */
+            }
+            
+            /* 1. 순위와 이미지는 그대로 둠 */
+            .rank-num { width: 30px; }
             .char-img { width: 40px; height: 40px; margin: 0 10px; }
-            .top-rank .char-img { width: 80px; height: 80px; margin-bottom: 10px;} 
-            .stat-box { width: 45%; margin: 10px 0 0 0; text-align: left; }
-            .top-rank .stat-box { width: 45%; }
+            .top-rank .char-img { width: 80px; height: 80px; margin-bottom: 5px; } 
+
+            /* 2. [핵심] 캐릭터 정보(이름)가 한 줄을 꽉 채우게 강제함 */
+            .char-info { 
+                width: 100%; 
+                margin: 5px 0 15px 0; /* 위아래 간격 추가 */
+                text-align: center;   /* 이름 가운데 정렬 */
+                flex-basis: 100%;     /* Flex 줄바꿈 강제 */
+                order: 1;             /* 순서상 이미지 다음 줄로 오게 함 */
+            }
+
+            /* 3. 스탯 박스는 이름 아래에 반반씩 배치 */
+            .stat-box { 
+                width: 48%; /* 절반보다 조금 작게 해서 한 줄에 2개 배치 */
+                margin: 0; 
+                text-align: center;
+                order: 2;   /* 이름 밑으로 보냄 */
+                background-color: rgba(0,0,0,0.2); /* 구분 잘 가게 배경 살짝 */
+                padding: 8px 0;
+                border-radius: 5px;
+            }
+            .stat-label { font-size: 0.8em; margin-bottom: 3px; }
+            .stat-value { font-size: 1.0em; }
+            
+            /* Top 3일 때 스탯 박스 크기 */
+            .top-rank .stat-box { width: 48%; }
         }
+        /* ▲▲▲ 여기까지 복사해서 기존 @media 부분을 덮어쓰세요 ▲▲▲ */
     </style>
 </head>
 <body>
