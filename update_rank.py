@@ -2,7 +2,7 @@ import requests
 import os
 from datetime import datetime
 
-# 1. API 키 가져오기 및 안전장치 (Bearer 글자 자동 제거)
+# API 키 가져오기 (Bearer 제거 안전장치 포함)
 RAW_API_KEY = os.environ.get('LOA_API_KEY', '')
 API_KEY = RAW_API_KEY.replace("Bearer ", "").replace("bearer ", "").strip()
 
@@ -21,7 +21,6 @@ NICKNAMES = [
     "밤꽃향기나는그녀", "선우현", "절구슬", "노량진게이"
 ]
 
-# 에러 진단을 위한 로그 저장소
 debug_logs = []
 
 def get_info(nickname):
@@ -36,42 +35,46 @@ def get_info(nickname):
         res = requests.get(url, headers=headers)
         if res.status_code == 200:
             data = res.json()
-            if data:
-                attack_power = "-"
-                if 'Stats' in data:
-                    for stat in data['Stats']:
-                        if stat['Type'] == "공격력":
-                            attack_power = stat['Value']
-                            break
-                
-                img_url = data.get('CharacterImage')
-                if not img_url:
-                    img_url = "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png"
+            if not data:
+                debug_logs.append(f"❌ {nickname}: 데이터 없음 (null)")
+                return None
+            
+            if 'ItemMaxLevel' not in data:
+                debug_logs.append(f"🛑 {nickname}: {str(data)}")
+                return None
 
-                return {
-                    'name': nickname,
-                    'class': data['CharacterClassName'],
-                    'level': float(data['ItemMaxLevel'].replace(',', '')),
-                    'atk': attack_power,
-                    'img': img_url
-                }
-            else:
-                debug_logs.append(f"❌ {nickname}: 캐릭터 정보 없음 (null 반환)")
+            attack_power = "-"
+            if 'Stats' in data:
+                for stat in data['Stats']:
+                    if stat['Type'] == "공격력":
+                        attack_power = stat['Value']
+                        break
+            
+            img_url = data.get('CharacterImage')
+            if not img_url:
+                img_url = "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png"
+
+            return {
+                'name': nickname,
+                'class': data['CharacterClassName'],
+                'level': float(data['ItemMaxLevel'].replace(',', '')),
+                'atk': attack_power,
+                'img': img_url
+            }
         elif res.status_code == 401:
-            debug_logs.append(f"🔒 {nickname}: 인증 실패 (401) - API 키가 틀렸습니다.")
+            debug_logs.append(f"🔒 {nickname}: 인증 실패 (401)")
         else:
             debug_logs.append(f"⚠️ {nickname}: 서버 오류 ({res.status_code})")
             
     except Exception as e:
-        debug_logs.append(f"💥 {nickname}: 프로그램 에러 - {str(e)}")
+        debug_logs.append(f"💥 {nickname}: 에러 - {str(e)}")
     return None
 
 def main():
     if not API_KEY:
-        error_msg = "🚫 치명적 오류: API 키가 없습니다. Settings > Secrets를 확인하세요."
-        print(error_msg)
+        error_html = "<h1>🚫 API 키가 없습니다. Settings > Secrets를 확인하세요.</h1>"
         with open("index.html", "w", encoding="utf-8") as f:
-            f.write(f"<h1>{error_msg}</h1>")
+            f.write(error_html)
         return
 
     results = []
@@ -82,27 +85,22 @@ def main():
         if info: 
             results.append(info)
     
-    # 🚨 만약 결과가 하나도 없다면 -> 진단 모드 화면 출력
+    # 실패 시 로그 출력
     if len(results) == 0:
-        print("결과가 0개여서 진단 리포트를 생성합니다.")
-        log_html = "<br>".join(debug_logs[:10]) # 최대 10개까지만 표시
-        
+        log_html = ""
+        for log in debug_logs[:10]:
+            color = "#ff6b6b"
+            if "🛑" in log: color = "#ffca5c"
+            log_html += f'<div style="color:{color}; margin-bottom:5px;">{log}</div>'
+
         html = f"""
         <!DOCTYPE html>
         <html lang="ko">
-        <body style="background-color: #222; color: white; padding: 20px; font-family: sans-serif;">
+        <body style="background-color: #222; color: white; padding: 30px; font-family: sans-serif;">
             <h1 style="color: #ff6b6b;">⚠️ 데이터 조회 실패</h1>
-            <p>서버 배경색은 바뀌었지만, 캐릭터 데이터를 가져오지 못했습니다.</p>
-            <div style="background: #333; padding: 15px; border-radius: 10px;">
-                <h3>🔍 실패 원인 분석 로그:</h3>
-                <p>{log_html}</p>
-                <p>...</p>
+            <div style="background: #333; padding: 20px; border-radius: 10px; font-family: monospace;">
+                {log_html}
             </div>
-            <h3 style="margin-top:20px;">💡 해결 방법:</h3>
-            <ul>
-                <li>로그에 <b>'401'</b>이 뜬다면: API 키가 잘못된 것입니다. Secrets에서 키를 다시 등록하세요.</li>
-                <li>로그에 <b>'null'</b>이 뜬다면: 닉네임이 실제 게임에 없는 이름입니다.</li>
-            </ul>
         </body>
         </html>
         """
@@ -110,7 +108,7 @@ def main():
             f.write(html)
         return
 
-    # 정상일 경우 기존 로직 수행
+    # 성공 시 랭킹 출력
     results.sort(key=lambda x: x['level'], reverse=True)
 
     html = f"""
@@ -121,34 +119,10 @@ def main():
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>로스트아크 놀자에요 랭킹</title>
         <style>
-            body {{
-                font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-                background-color: #121214;
-                color: #e0e0e0;
-                display: flex;
-                justify-content: center;
-                padding: 20px;
-                margin: 0;
-            }}
-            .container {{
-                max-width: 900px;
-                width: 100%;
-                background-color: #1e1e20;
-                border-radius: 12px;
-                padding: 20px;
-                box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-            }}
+            body {{ font-family: 'Apple SD Gothic Neo', sans-serif; background-color: #121214; color: #e0e0e0; display: flex; justify-content: center; padding: 20px; margin: 0; }}
+            .container {{ max-width: 900px; width: 100%; background-color: #1e1e20; border-radius: 12px; padding: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.5); }}
             h2 {{ text-align: center; color: #ffca5c; margin-bottom: 20px; }}
-            .rank-row {{
-                display: flex;
-                align-items: center;
-                background-color: #2a2a2e;
-                margin-bottom: 10px;
-                padding: 10px 20px;
-                border-radius: 8px;
-                border: 1px solid #3a3a40;
-                transition: 0.2s;
-            }}
+            .rank-row {{ display: flex; align-items: center; background-color: #2a2a2e; margin-bottom: 10px; padding: 10px 20px; border-radius: 8px; border: 1px solid #3a3a40; transition: 0.2s; }}
             .rank-row:hover {{ background-color: #35353a; transform: translateY(-2px); }}
             .rank-num {{ width: 40px; font-size: 1.2em; font-weight: bold; color: #888; text-align: center; }}
             .rank-1 {{ color: #ffd700; }} .rank-2 {{ color: #c0c0c0; }} .rank-3 {{ color: #cd7f32; }}
