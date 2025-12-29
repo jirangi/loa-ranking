@@ -14,20 +14,20 @@ API_KEY = RAW_API_KEY.replace("Bearer ", "").replace("bearer ", "").strip()
 HEADERS = {'accept': 'application/json', 'authorization': f'bearer {API_KEY}'}
 
 # ==========================================
-# 2. 그룹별 설정 (구글 시트 링크 유지하세요!)
+# 2. 그룹별 설정 (구글 시트 링크는 유지하세요!)
 # ==========================================
 GROUPS = [
     {
         "name": "제숙단",
         "txt_file": "jesukdan.txt",
         "json_file": "jesukdan_data.json",
-        "sheet_url": "여기에_제숙단_CSV_링크를_넣으세요"  # 👈 [기존 링크 유지]
+        "sheet_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRYJZDPz2DK2bYNbwDWg-Lrd2GWOGunX8BZGYsW_nE7Xomcv93zCtN00vj_tFZESjQGCYKsL1BlxJ03/pub?output=csv"
     },
     {
         "name": "놀자에요",
         "txt_file": "nolja.txt",
         "json_file": "nolja_data.json",
-        "sheet_url": "여기에_놀자에요_CSV_링크를_넣으세요" # 👈 [기존 링크 유지]
+        "sheet_url": "https://docs.google.com/spreadsheets/d/1BGzvgQ_PN70_DUCv5b0lbdIp5Fq3arIkPRpmZ2AVfWY/edit?resourcekey=&gid=1405051#gid=1405051"
     }
 ]
 
@@ -106,20 +106,14 @@ for group in GROUPS:
         if data:
             profile = data.get('ArmoryProfile', {})
             
-            # 1. 아이템 레벨 안전하게 가져오기
+            # 1. 아이템 레벨
             item_level = profile.get('ItemMaxLevel')
             if not item_level:
                 item_level = profile.get('ItemAvgLevel', '0.00')
 
-            # 2. 전투력(공격력) 찾기 [수정된 부분]
-            # Stats 리스트 안에서 "Type"이 "공격력"인 것을 찾습니다.
-            combat_power = '0'
-            stats_list = profile.get('Stats', [])
-            if stats_list:
-                for stat in stats_list:
-                    if stat.get('Type') == '공격력':
-                        combat_power = stat.get('Value', '0')
-                        break
+            # 2. 전투력 (원래대로 복구!)
+            # 공격력(Attack Power)이 아니라 전투력(Combat Power)을 가져옵니다.
+            combat_power = profile.get('CombatPower', '0')
 
             char_info = {
                 "name": name,
