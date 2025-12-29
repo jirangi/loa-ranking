@@ -14,20 +14,20 @@ API_KEY = RAW_API_KEY.replace("Bearer ", "").replace("bearer ", "").strip()
 HEADERS = {'accept': 'application/json', 'authorization': f'bearer {API_KEY}'}
 
 # ==========================================
-# ⭐ 2. 그룹별 설정 (여기에 링크 2개를 각각 넣으세요!)
+# 2. 그룹별 설정 (구글 시트 링크 유지하세요!)
 # ==========================================
 GROUPS = [
     {
         "name": "제숙단",
-        "txt_file": "jesukdan.txt",          # 기본 명단 파일 (없으면 자동 생성됨)
-        "json_file": "jesukdan_data.json",   # 저장될 데이터 파일
-        "sheet_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRYJZDPz2DK2bYNbwDWg-Lrd2GWOGunX8BZGYsW_nE7Xomcv93zCtN00vj_tFZESjQGCYKsL1BlxJ03/pub?output=csv"  # 👈 [입력 1]
+        "txt_file": "jesukdan.txt",
+        "json_file": "jesukdan_data.json",
+        "sheet_url": "여기에_제숙단_CSV_링크를_넣으세요"  # 👈 [기존 링크 유지]
     },
     {
         "name": "놀자에요",
-        "txt_file": "nolja.txt",             # 기본 명단 파일 (새로 만드세요!)
-        "json_file": "nolja_data.json",      # 저장될 데이터 파일
-        "sheet_url": "https://docs.google.com/spreadsheets/d/1BGzvgQ_PN70_DUCv5b0lbdIp5Fq3arIkPRpmZ2AVfWY/edit?resourcekey=&gid=1405051#gid=1405051" # 👈 [입력 2]
+        "txt_file": "nolja.txt",
+        "json_file": "nolja_data.json",
+        "sheet_url": "여기에_놀자에요_CSV_링크를_넣으세요" # 👈 [기존 링크 유지]
     }
 ]
 
@@ -74,7 +74,7 @@ def get_character_data(name):
     return None
 
 # ==========================================
-# 4. 메인 로직 (반복문으로 두 그룹 모두 처리)
+# 4. 메인 로직
 # ==========================================
 if not API_KEY:
     print("❌ 오류: API 키가 없습니다.")
@@ -92,7 +92,7 @@ for group in GROUPS:
     # B. 구글 시트 명단 읽기
     sheet_names = get_google_sheet_names(group['sheet_url'])
 
-    # C. 명단 합치기 (중복 제거)
+    # C. 명단 합치기
     all_names = list(set(local_names + sheet_names))
     print(f"   📊 총 {len(all_names)}명의 데이터 갱신 시작")
 
@@ -105,20 +105,31 @@ for group in GROUPS:
         
         if data:
             profile = data.get('ArmoryProfile', {})
-            # 레벨 안전장치
+            
+            # 1. 아이템 레벨 안전하게 가져오기
             item_level = profile.get('ItemMaxLevel')
             if not item_level:
                 item_level = profile.get('ItemAvgLevel', '0.00')
+
+            # 2. 전투력(공격력) 찾기 [수정된 부분]
+            # Stats 리스트 안에서 "Type"이 "공격력"인 것을 찾습니다.
+            combat_power = '0'
+            stats_list = profile.get('Stats', [])
+            if stats_list:
+                for stat in stats_list:
+                    if stat.get('Type') == '공격력':
+                        combat_power = stat.get('Value', '0')
+                        break
 
             char_info = {
                 "name": name,
                 "job": profile.get('CharacterClassName', '정보없음'),
                 "img": profile.get('CharacterImage', 'https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/default_profile.png'),
                 "itemLevel": item_level,
-                "combatPower": profile.get('CombatPower', '0')
+                "combatPower": combat_power
             }
             results.append(char_info)
-            print("✅")
+            print(f"✅ (Lv.{item_level} / {combat_power})")
         else:
             print("❌")
         
