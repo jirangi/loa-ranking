@@ -10,7 +10,7 @@ import time
 RAW_API_KEY = os.environ.get('LOA_API_KEY', '')
 API_KEY = RAW_API_KEY.replace("Bearer ", "").replace("bearer ", "").strip()
 
-# ⭐ 관리할 파일 목록을 여기에 다 적어주면 됩니다!
+# 👇 여기가 핵심입니다. 두 파일을 모두 적어줘야 합니다.
 TARGET_FILES = ["index.html", "jesukdan.html"]
 
 if not API_KEY:
@@ -63,7 +63,7 @@ for file_name in TARGET_FILES:
                 if val_div:
                     val_div.string = str(combat_power)
 
-                # B. [추가기능] 캐릭터 이미지 자동 업데이트
+                # B. 캐릭터 이미지 자동 업데이트
                 img_url = profile.get('CharacterImage')
                 img_tag = row.select_one('.char-img')
                 if img_url and img_tag:
