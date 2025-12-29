@@ -181,3 +181,31 @@ def main():
             <div class="rank-row">
                 <div class="rank-num {rank_class}">{i}</div>
                 <img src="{char['img']}" class="char-img" alt="img">
+                <div class="char-info">
+                    <div class="char-name">{char['name']}</div>
+                    <div class="char-class">{char['class']}</div>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">아이템 레벨</span>
+                    <div class="stat-value level-val">{char['level']:,.2f}</div>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">공격력</span>
+                    <div class="stat-value atk-val">{char['atk']}</div>
+                </div>
+            </div>
+        """
+    
+    html += f"""
+            </div>
+            <div class="update-time">마지막 업데이트: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</div>
+        </div>
+    </body>
+    </html>
+    """
+
+    with open("index.html", "w", encoding="utf-8") as f:
+        f.write(html)
+
+if __name__ == "__main__":
+    main()
