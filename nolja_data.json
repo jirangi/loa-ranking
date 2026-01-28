@@ -1,4 +1,14 @@
 {
-  "updated_at": "2026-01-27 23:15:05",
-  "characters": []
+  "updated_at": "2026-01-28 01:00:06",
+  "characters": [
+    {
+      "name": "간지버거",
+      "job": "바드",
+      "img": "https://img.lostark.co.kr/armory/8/F714E8E763741320D85F81F0FB1A7C5BDA799EB34A671C12A84CC191AA9448FB.jpg?v=20260127131103",
+      "itemLevel": "1,745.83",
+      "attackPower": "154867",
+      "combatPower": "1,566.02",
+      "congrats_date": "2026-01-28"
+    }
+  ]
 }
