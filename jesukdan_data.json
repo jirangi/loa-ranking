@@ -1,15 +1,6 @@
 {
-  "updated_at": "2026-03-19 08:31:09",
+  "updated_at": "2026-03-19 09:34:04",
   "characters": [
-    {
-      "name": "비상과자",
-      "job": "홀리나이트",
-      "img": "https://img.lostark.co.kr/armory/1/69EB6CCDBD50DE0194FEB6E85DC2B47E1BCF1A55ADF0FBC3A58C0A2BB17E5C18.jpg?v=20260318133807",
-      "itemLevel": "1,756.66",
-      "attackPower": "185898",
-      "combatPower": "4,442.41",
-      "congrats_date": "2026-03-18"
-    },
     {
       "name": "민땁",
       "job": "아르카나",
@@ -17,6 +8,15 @@
       "itemLevel": "1,750.83",
       "attackPower": "185999",
       "combatPower": "4,436.43",
+      "congrats_date": "2026-03-18"
+    },
+    {
+      "name": "간지버거",
+      "job": "바드",
+      "img": "https://img.lostark.co.kr/armory/8/F714E8E763741320D85F81F0FB1A7C5BDA799EB34A671C12A84CC191AA9448FB.jpg?v=20260315100834",
+      "itemLevel": "1,766.66",
+      "attackPower": "171906",
+      "combatPower": "1,824.30",
       "congrats_date": "2026-03-18"
     },
     {
@@ -38,48 +38,21 @@
       "congrats_date": "2026-03-18"
     },
     {
-      "name": "뀨잉워로드",
-      "job": "워로드",
-      "img": "https://img.lostark.co.kr/armory/3/7E4D5C28F32E31AE20E60C5B1EF24B19646EB94825414C1A06828153FA7621D9.jpg?v=20260317105936",
-      "itemLevel": "1,740.00",
-      "attackPower": "172757",
-      "combatPower": "2,411.25",
+      "name": "피학증삭제하면닉변함",
+      "job": "소울이터",
+      "img": "https://img.lostark.co.kr/armory/4/E49C0C710CC48E17E7F135C7B45B29D642005ECD2819400A7AFF465ADED1215C.jpg?v=20260319051444",
+      "itemLevel": "1,776.66",
+      "attackPower": "189547",
+      "combatPower": "2,594.37",
       "congrats_date": "2026-03-18"
     },
     {
-      "name": "최여운",
-      "job": "리퍼",
-      "img": "https://img.lostark.co.kr/armory/3/9ED42ABF3F697068B43405A4CDFD7007113E7A10C6FC020BA65069F50994D172.jpg?v=20260318232212",
-      "itemLevel": "1,757.50",
-      "attackPower": "190997",
-      "combatPower": "5,073.13",
-      "congrats_date": "2026-03-18"
-    },
-    {
-      "name": "통근육",
-      "job": "버서커",
-      "img": "https://img.lostark.co.kr/armory/6/64574FEA98F900D2145BA65462A67E9BCE4B98334EBCC274596BF346A0406080.jpg?v=20260315115950",
-      "itemLevel": "1,773.33",
-      "attackPower": "209394",
-      "combatPower": "5,440.01",
-      "congrats_date": "2026-03-18"
-    },
-    {
-      "name": "백곰워붕장",
-      "job": "워로드",
-      "img": "https://img.lostark.co.kr/armory/2/AF95D33DD37850C4880E83DF2B09E90E92A10B789302A9C4775622166329D579.jpg?v=20260318105759",
-      "itemLevel": "1,697.50",
-      "attackPower": "115135",
-      "combatPower": "1,458.89",
-      "congrats_date": ""
-    },
-    {
-      "name": "해달바람",
-      "job": "홀리나이트",
-      "img": "https://img.lostark.co.kr/armory/9/570F0B61518B6FB19B8376FD45206F8396E395B994A3EDE179C97110E42FFB97.jpg?v=20260307133123",
-      "itemLevel": "1,730.00",
-      "attackPower": "128562",
-      "combatPower": "1,285.85",
+      "name": "기도대신목을베",
+      "job": "발키리",
+      "img": "https://img.lostark.co.kr/armory/7/CF9B6ECEF5F38F326FA22B80838427B83651163692B14C6A82F43EB48A26315A.jpg?v=20260317160050",
+      "itemLevel": "1,750.00",
+      "attackPower": "167720",
+      "combatPower": "3,411.45",
       "congrats_date": "2026-03-18"
     },
     {
@@ -89,15 +62,6 @@
       "itemLevel": "1,727.66",
       "attackPower": "125629",
       "combatPower": "1,246.19",
-      "congrats_date": "2026-03-18"
-    },
-    {
-      "name": "간지버거",
-      "job": "바드",
-      "img": "https://img.lostark.co.kr/armory/8/F714E8E763741320D85F81F0FB1A7C5BDA799EB34A671C12A84CC191AA9448FB.jpg?v=20260315100834",
-      "itemLevel": "1,766.66",
-      "attackPower": "171906",
-      "combatPower": "1,824.30",
       "congrats_date": "2026-03-18"
     },
     {
@@ -119,22 +83,58 @@
       "congrats_date": "2026-03-18"
     },
     {
-      "name": "피학증삭제하면닉변함",
-      "job": "소울이터",
-      "img": "https://img.lostark.co.kr/armory/4/E49C0C710CC48E17E7F135C7B45B29D642005ECD2819400A7AFF465ADED1215C.jpg?v=20260319051444",
-      "itemLevel": "1,776.66",
-      "attackPower": "189547",
-      "combatPower": "2,594.37",
+      "name": "통근육",
+      "job": "버서커",
+      "img": "https://img.lostark.co.kr/armory/6/64574FEA98F900D2145BA65462A67E9BCE4B98334EBCC274596BF346A0406080.jpg?v=20260315115950",
+      "itemLevel": "1,773.33",
+      "attackPower": "209394",
+      "combatPower": "5,440.01",
       "congrats_date": "2026-03-18"
     },
     {
-      "name": "기도대신목을베",
-      "job": "발키리",
-      "img": "https://img.lostark.co.kr/armory/7/CF9B6ECEF5F38F326FA22B80838427B83651163692B14C6A82F43EB48A26315A.jpg?v=20260317160050",
-      "itemLevel": "1,750.00",
-      "attackPower": "167720",
-      "combatPower": "3,411.45",
+      "name": "최여운",
+      "job": "리퍼",
+      "img": "https://img.lostark.co.kr/armory/3/9ED42ABF3F697068B43405A4CDFD7007113E7A10C6FC020BA65069F50994D172.jpg?v=20260319090322",
+      "itemLevel": "1,757.50",
+      "attackPower": "190997",
+      "combatPower": "5,073.13",
       "congrats_date": "2026-03-18"
+    },
+    {
+      "name": "해달바람",
+      "job": "홀리나이트",
+      "img": "https://img.lostark.co.kr/armory/9/570F0B61518B6FB19B8376FD45206F8396E395B994A3EDE179C97110E42FFB97.jpg?v=20260307133123",
+      "itemLevel": "1,730.00",
+      "attackPower": "128562",
+      "combatPower": "1,285.85",
+      "congrats_date": "2026-03-18"
+    },
+    {
+      "name": "비상과자",
+      "job": "홀리나이트",
+      "img": "https://img.lostark.co.kr/armory/1/69EB6CCDBD50DE0194FEB6E85DC2B47E1BCF1A55ADF0FBC3A58C0A2BB17E5C18.jpg?v=20260318133807",
+      "itemLevel": "1,756.66",
+      "attackPower": "185898",
+      "combatPower": "4,442.41",
+      "congrats_date": "2026-03-18"
+    },
+    {
+      "name": "뀨잉워로드",
+      "job": "워로드",
+      "img": "https://img.lostark.co.kr/armory/3/7E4D5C28F32E31AE20E60C5B1EF24B19646EB94825414C1A06828153FA7621D9.jpg?v=20260317105936",
+      "itemLevel": "1,740.00",
+      "attackPower": "172757",
+      "combatPower": "2,411.25",
+      "congrats_date": "2026-03-18"
+    },
+    {
+      "name": "백곰워붕장",
+      "job": "워로드",
+      "img": "https://img.lostark.co.kr/armory/2/AF95D33DD37850C4880E83DF2B09E90E92A10B789302A9C4775622166329D579.jpg?v=20260318105759",
+      "itemLevel": "1,697.50",
+      "attackPower": "115135",
+      "combatPower": "1,458.89",
+      "congrats_date": ""
     }
   ]
 }
