@@ -1,31 +1,49 @@
 {
-  "updated_at": "2026-03-19 06:44:51",
+  "updated_at": "2026-03-19 07:40:43",
   "characters": [
-    {
-      "name": "해달바람",
-      "job": "홀리나이트",
-      "img": "https://img.lostark.co.kr/armory/9/570F0B61518B6FB19B8376FD45206F8396E395B994A3EDE179C97110E42FFB97.jpg?v=20260307133123",
-      "itemLevel": "1,730.00",
-      "attackPower": "128562",
-      "combatPower": "1,285.85",
-      "congrats_date": "2026-03-18"
-    },
-    {
-      "name": "핑뚝이환수사",
-      "job": "환수사",
-      "img": "https://img.lostark.co.kr/armory/2/8540D4C1C058DA77C05AAB7EBFC3E439F5A4355971E87AE56682B6BD50558B0B.jpg?v=20260316160144",
-      "itemLevel": "1,766.66",
-      "attackPower": "193405",
-      "combatPower": "4,274.60",
-      "congrats_date": "2026-03-18"
-    },
     {
       "name": "간지버거",
       "job": "바드",
       "img": "https://img.lostark.co.kr/armory/8/F714E8E763741320D85F81F0FB1A7C5BDA799EB34A671C12A84CC191AA9448FB.jpg?v=20260315100834",
       "itemLevel": "1,766.66",
-      "attackPower": "172400",
+      "attackPower": "171906",
       "combatPower": "1,813.20",
+      "congrats_date": "2026-03-18"
+    },
+    {
+      "name": "피학증삭제하면닉변함",
+      "job": "소울이터",
+      "img": "https://img.lostark.co.kr/armory/4/E49C0C710CC48E17E7F135C7B45B29D642005ECD2819400A7AFF465ADED1215C.jpg?v=20260319051444",
+      "itemLevel": "1,776.66",
+      "attackPower": "189547",
+      "combatPower": "2,594.37",
+      "congrats_date": "2026-03-18"
+    },
+    {
+      "name": "낌하빈",
+      "job": "배틀마스터",
+      "img": "https://img.lostark.co.kr/armory/1/45756891C04FF19C89FCAFE1738B720D283D696E25EB5DAB37830C9047BB1F4C.jpg?v=20260319025902",
+      "itemLevel": "1,784.16",
+      "attackPower": "219525",
+      "combatPower": "6,914.28",
+      "congrats_date": "2026-03-18"
+    },
+    {
+      "name": "달해바람",
+      "job": "홀리나이트",
+      "img": "https://img.lostark.co.kr/armory/0/44E7A2B50118C8474E22484B0C1C75CAAD9A50A3B02142734A77CFAF26A8FAE2.jpg?v=20260315120541",
+      "itemLevel": "1,727.66",
+      "attackPower": "125629",
+      "combatPower": "1,246.19",
+      "congrats_date": "2026-03-18"
+    },
+    {
+      "name": "비상과자",
+      "job": "홀리나이트",
+      "img": "https://img.lostark.co.kr/armory/1/69EB6CCDBD50DE0194FEB6E85DC2B47E1BCF1A55ADF0FBC3A58C0A2BB17E5C18.jpg?v=20260318133807",
+      "itemLevel": "1,756.66",
+      "attackPower": "185898",
+      "combatPower": "4,442.41",
       "congrats_date": "2026-03-18"
     },
     {
@@ -35,24 +53,6 @@
       "itemLevel": "1,750.83",
       "attackPower": "185999",
       "combatPower": "4,436.43",
-      "congrats_date": "2026-03-18"
-    },
-    {
-      "name": "뀨잉워로드",
-      "job": "워로드",
-      "img": "https://img.lostark.co.kr/armory/3/7E4D5C28F32E31AE20E60C5B1EF24B19646EB94825414C1A06828153FA7621D9.jpg?v=20260317105936",
-      "itemLevel": "1,740.00",
-      "attackPower": "172757",
-      "combatPower": "2,411.25",
-      "congrats_date": "2026-03-18"
-    },
-    {
-      "name": "낌하빈",
-      "job": "배틀마스터",
-      "img": "https://img.lostark.co.kr/armory/1/45756891C04FF19C89FCAFE1738B720D283D696E25EB5DAB37830C9047BB1F4C.jpg?v=20260319025902",
-      "itemLevel": "1,784.16",
-      "attackPower": "217620",
-      "combatPower": "6,914.28",
       "congrats_date": "2026-03-18"
     },
     {
@@ -74,21 +74,12 @@
       "congrats_date": "2026-03-18"
     },
     {
-      "name": "힐주세요형님해봐",
-      "job": "바드",
-      "img": "https://img.lostark.co.kr/armory/3/37369041D74BA25417AD2F0C0E38C2DB47AACAFF864D49D8CBAF5BCBDB886D81.jpg?v=20260318095057",
-      "itemLevel": "1,763.33",
-      "attackPower": "188920",
-      "combatPower": "4,446.85",
-      "congrats_date": "2026-03-18"
-    },
-    {
-      "name": "달해바람",
-      "job": "홀리나이트",
-      "img": "https://img.lostark.co.kr/armory/0/44E7A2B50118C8474E22484B0C1C75CAAD9A50A3B02142734A77CFAF26A8FAE2.jpg?v=20260315120541",
-      "itemLevel": "1,727.66",
-      "attackPower": "125629",
-      "combatPower": "1,246.19",
+      "name": "뀨잉워로드",
+      "job": "워로드",
+      "img": "https://img.lostark.co.kr/armory/3/7E4D5C28F32E31AE20E60C5B1EF24B19646EB94825414C1A06828153FA7621D9.jpg?v=20260317105936",
+      "itemLevel": "1,740.00",
+      "attackPower": "172757",
+      "combatPower": "2,411.25",
       "congrats_date": "2026-03-18"
     },
     {
@@ -101,21 +92,12 @@
       "congrats_date": "2026-03-18"
     },
     {
-      "name": "피학증삭제하면닉변함",
-      "job": "소울이터",
-      "img": "https://img.lostark.co.kr/armory/4/E49C0C710CC48E17E7F135C7B45B29D642005ECD2819400A7AFF465ADED1215C.jpg?v=20260319051444",
-      "itemLevel": "1,776.66",
-      "attackPower": "189547",
-      "combatPower": "2,594.37",
-      "congrats_date": "2026-03-18"
-    },
-    {
-      "name": "비상과자",
-      "job": "홀리나이트",
-      "img": "https://img.lostark.co.kr/armory/1/69EB6CCDBD50DE0194FEB6E85DC2B47E1BCF1A55ADF0FBC3A58C0A2BB17E5C18.jpg?v=20260318133807",
-      "itemLevel": "1,756.66",
-      "attackPower": "185898",
-      "combatPower": "4,442.41",
+      "name": "핑뚝이환수사",
+      "job": "환수사",
+      "img": "https://img.lostark.co.kr/armory/2/8540D4C1C058DA77C05AAB7EBFC3E439F5A4355971E87AE56682B6BD50558B0B.jpg?v=20260316160144",
+      "itemLevel": "1,766.66",
+      "attackPower": "193405",
+      "combatPower": "4,274.60",
       "congrats_date": "2026-03-18"
     },
     {
@@ -135,6 +117,24 @@
       "attackPower": "115135",
       "combatPower": "1,458.89",
       "congrats_date": ""
+    },
+    {
+      "name": "해달바람",
+      "job": "홀리나이트",
+      "img": "https://img.lostark.co.kr/armory/9/570F0B61518B6FB19B8376FD45206F8396E395B994A3EDE179C97110E42FFB97.jpg?v=20260307133123",
+      "itemLevel": "1,730.00",
+      "attackPower": "128562",
+      "combatPower": "1,285.85",
+      "congrats_date": "2026-03-18"
+    },
+    {
+      "name": "힐주세요형님해봐",
+      "job": "바드",
+      "img": "https://img.lostark.co.kr/armory/3/37369041D74BA25417AD2F0C0E38C2DB47AACAFF864D49D8CBAF5BCBDB886D81.jpg?v=20260318095057",
+      "itemLevel": "1,763.33",
+      "attackPower": "188920",
+      "combatPower": "4,446.85",
+      "congrats_date": "2026-03-18"
     }
   ]
 }
