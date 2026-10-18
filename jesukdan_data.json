@@ -1,78 +1,6 @@
 {
-  "updated_at": "2026-10-18 01:59:14",
+  "updated_at": "2026-10-18 06:57:26",
   "characters": [
-    {
-      "name": "달해바람",
-      "job": "홀리나이트",
-      "img": "https://cdn-lostark.game.onstove.com/armory/0/44E7A2B50118C8474E22484B0C1C75CAAD9A50A3B02142734A77CFAF26A8FAE2.jpg?v=20261010210231",
-      "itemLevel": "1,750.00",
-      "attackPower": "166083",
-      "combatPower": "1,662.22",
-      "congrats_date": "2026-10-14"
-    },
-    {
-      "name": "낌하빈",
-      "job": "배틀마스터",
-      "img": "https://cdn-lostark.game.onstove.com/armory/1/45756891C04FF19C89FCAFE1738B720D283D696E25EB5DAB37830C9047BB1F4C.jpg?v=20261017204252",
-      "itemLevel": "1,800.00",
-      "attackPower": "278054",
-      "combatPower": "10,010.21",
-      "congrats_date": "2026-10-14"
-    },
-    {
-      "name": "해달바람",
-      "job": "홀리나이트",
-      "img": "https://cdn-lostark.game.onstove.com/armory/9/570F0B61518B6FB19B8376FD45206F8396E395B994A3EDE179C97110E42FFB97.jpg?v=20260905224805",
-      "itemLevel": "1,750.00",
-      "attackPower": "164119",
-      "combatPower": "1,761.32",
-      "congrats_date": "2026-10-14"
-    },
-    {
-      "name": "비상과자",
-      "job": "홀리나이트",
-      "img": "https://cdn-lostark.game.onstove.com/armory/1/69EB6CCDBD50DE0194FEB6E85DC2B47E1BCF1A55ADF0FBC3A58C0A2BB17E5C18.jpg?v=20261018095738",
-      "itemLevel": "1,777.50",
-      "attackPower": "226485",
-      "combatPower": "5,889.84",
-      "congrats_date": "2026-10-14"
-    },
-    {
-      "name": "통근육",
-      "job": "버서커",
-      "img": "https://cdn-lostark.game.onstove.com/armory/6/64574FEA98F900D2145BA65462A67E9BCE4B98334EBCC274596BF346A0406080.jpg?v=20260927212738",
-      "itemLevel": "1,787.50",
-      "attackPower": "273357",
-      "combatPower": "8,226.92",
-      "congrats_date": "2026-10-14"
-    },
-    {
-      "name": "피학증삭제하면닉변함",
-      "job": "소울이터",
-      "img": "https://cdn-lostark.game.onstove.com/armory/4/E49C0C710CC48E17E7F135C7B45B29D642005ECD2819400A7AFF465ADED1215C.jpg?v=20261017034621",
-      "itemLevel": "1,790.00",
-      "attackPower": "267083",
-      "combatPower": "9,039.61",
-      "congrats_date": "2026-10-14"
-    },
-    {
-      "name": "힐주세요형님해봐",
-      "job": "바드",
-      "img": "https://cdn-lostark.game.onstove.com/armory/3/37369041D74BA25417AD2F0C0E38C2DB47AACAFF864D49D8CBAF5BCBDB886D81.jpg?v=20261017090153",
-      "itemLevel": "1,775.00",
-      "attackPower": "241157",
-      "combatPower": "6,743.66",
-      "congrats_date": "2026-10-14"
-    },
-    {
-      "name": "간지버거",
-      "job": "바드",
-      "img": "https://cdn-lostark.game.onstove.com/armory/8/F714E8E763741320D85F81F0FB1A7C5BDA799EB34A671C12A84CC191AA9448FB.jpg?v=20261016234158",
-      "itemLevel": "1,780.00",
-      "attackPower": "211499",
-      "combatPower": "2,521.41",
-      "congrats_date": "2026-10-14"
-    },
     {
       "name": "핑뚝이환수사",
       "job": "환수사",
@@ -80,15 +8,6 @@
       "itemLevel": "1,780.83",
       "attackPower": "237277",
       "combatPower": "6,547.39",
-      "congrats_date": "2026-10-14"
-    },
-    {
-      "name": "민땁",
-      "job": "아르카나",
-      "img": "https://cdn-lostark.game.onstove.com/armory/6/04378648778779EB892E5BE4B87D456F9EE0D05CDFA0558B2CB5E82D5988E7AA.jpg?v=20261014235331",
-      "itemLevel": "1,774.16",
-      "attackPower": "221513",
-      "combatPower": "5,039.14",
       "congrats_date": "2026-10-14"
     },
     {
@@ -101,12 +20,66 @@
       "congrats_date": "2026-10-14"
     },
     {
-      "name": "최여운",
-      "job": "리퍼",
-      "img": "https://cdn-lostark.game.onstove.com/armory/3/9ED42ABF3F697068B43405A4CDFD7007113E7A10C6FC020BA65069F50994D172.jpg?v=20261011095335",
-      "itemLevel": "1,775.83",
-      "attackPower": "201332",
-      "combatPower": "2,889.56",
+      "name": "민땁",
+      "job": "아르카나",
+      "img": "https://cdn-lostark.game.onstove.com/armory/6/04378648778779EB892E5BE4B87D456F9EE0D05CDFA0558B2CB5E82D5988E7AA.jpg?v=20261014235331",
+      "itemLevel": "1,774.16",
+      "attackPower": "232614",
+      "combatPower": "4,102.52",
+      "congrats_date": "2026-10-14"
+    },
+    {
+      "name": "통근육",
+      "job": "버서커",
+      "img": "https://cdn-lostark.game.onstove.com/armory/6/64574FEA98F900D2145BA65462A67E9BCE4B98334EBCC274596BF346A0406080.jpg?v=20260927212738",
+      "itemLevel": "1,787.50",
+      "attackPower": "273357",
+      "combatPower": "8,226.92",
+      "congrats_date": "2026-10-14"
+    },
+    {
+      "name": "간지버거",
+      "job": "바드",
+      "img": "https://cdn-lostark.game.onstove.com/armory/8/F714E8E763741320D85F81F0FB1A7C5BDA799EB34A671C12A84CC191AA9448FB.jpg?v=20261016234158",
+      "itemLevel": "1,780.00",
+      "attackPower": "211499",
+      "combatPower": "2,521.41",
+      "congrats_date": "2026-10-14"
+    },
+    {
+      "name": "피학증삭제하면닉변함",
+      "job": "소울이터",
+      "img": "https://cdn-lostark.game.onstove.com/armory/4/E49C0C710CC48E17E7F135C7B45B29D642005ECD2819400A7AFF465ADED1215C.jpg?v=20261017034621",
+      "itemLevel": "1,790.00",
+      "attackPower": "267083",
+      "combatPower": "9,039.61",
+      "congrats_date": "2026-10-14"
+    },
+    {
+      "name": "해달바람",
+      "job": "홀리나이트",
+      "img": "https://cdn-lostark.game.onstove.com/armory/9/570F0B61518B6FB19B8376FD45206F8396E395B994A3EDE179C97110E42FFB97.jpg?v=20260905224805",
+      "itemLevel": "1,750.00",
+      "attackPower": "164119",
+      "combatPower": "1,761.32",
+      "congrats_date": "2026-10-14"
+    },
+    {
+      "name": "달해바람",
+      "job": "홀리나이트",
+      "img": "https://cdn-lostark.game.onstove.com/armory/0/44E7A2B50118C8474E22484B0C1C75CAAD9A50A3B02142734A77CFAF26A8FAE2.jpg?v=20261010210231",
+      "itemLevel": "1,750.00",
+      "attackPower": "166083",
+      "combatPower": "1,662.22",
+      "congrats_date": "2026-10-14"
+    },
+    {
+      "name": "비상과자",
+      "job": "홀리나이트",
+      "img": "https://cdn-lostark.game.onstove.com/armory/1/69EB6CCDBD50DE0194FEB6E85DC2B47E1BCF1A55ADF0FBC3A58C0A2BB17E5C18.jpg?v=20261018114150",
+      "itemLevel": "1,777.50",
+      "attackPower": "226485",
+      "combatPower": "5,889.84",
       "congrats_date": "2026-10-14"
     },
     {
@@ -119,12 +92,39 @@
       "congrats_date": "2026-10-14"
     },
     {
+      "name": "힐주세요형님해봐",
+      "job": "바드",
+      "img": "https://cdn-lostark.game.onstove.com/armory/3/37369041D74BA25417AD2F0C0E38C2DB47AACAFF864D49D8CBAF5BCBDB886D81.jpg?v=20261018125810",
+      "itemLevel": "1,775.00",
+      "attackPower": "241157",
+      "combatPower": "6,677.25",
+      "congrats_date": "2026-10-14"
+    },
+    {
+      "name": "최여운",
+      "job": "리퍼",
+      "img": "https://cdn-lostark.game.onstove.com/armory/3/9ED42ABF3F697068B43405A4CDFD7007113E7A10C6FC020BA65069F50994D172.jpg?v=20261011095335",
+      "itemLevel": "1,775.83",
+      "attackPower": "201332",
+      "combatPower": "2,889.56",
+      "congrats_date": "2026-10-14"
+    },
+    {
       "name": "뀨잉워로드",
       "job": "워로드",
       "img": "https://cdn-lostark.game.onstove.com/armory/3/7E4D5C28F32E31AE20E60C5B1EF24B19646EB94825414C1A06828153FA7621D9.jpg?v=20260520101327",
       "itemLevel": "1,756.66",
       "attackPower": "200290",
       "combatPower": "4,895.50",
+      "congrats_date": "2026-10-14"
+    },
+    {
+      "name": "낌하빈",
+      "job": "배틀마스터",
+      "img": "https://cdn-lostark.game.onstove.com/armory/1/45756891C04FF19C89FCAFE1738B720D283D696E25EB5DAB37830C9047BB1F4C.jpg?v=20261017204252",
+      "itemLevel": "1,800.00",
+      "attackPower": "278054",
+      "combatPower": "10,010.21",
       "congrats_date": "2026-10-14"
     }
   ]
